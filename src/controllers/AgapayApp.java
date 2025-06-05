@@ -1,0 +1,30 @@
+package controllers;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+
+public class AgapayApp extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        //as a main page
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/AgapayLoginPage.fxml"));
+
+        //title of main page
+        primaryStage.setTitle("Agapay");
+
+        //window size
+        primaryStage.setScene(new Scene(root, 1270, 640));
+
+        primaryStage.setResizable(false);
+
+        //display 
+        primaryStage.show();
+    }
+    public static void main(String[] args) {
+        launch(args);
+    }
+}

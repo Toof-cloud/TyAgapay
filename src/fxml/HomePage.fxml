@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.MotionBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="homeRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1270.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomePageController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="643.0" prefWidth="1270.0">
+               <children>
+                  <Text layoutX="93.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Agapay">
+                     <font>
+                        <Font name="Segoe UI Bold" size="25.0" />
+                     </font>
+                  </Text>
+                  <Circle fill="WHITE" layoutX="60.0" layoutY="34.0" radius="24.0" stroke="#aaaaaa" strokeType="INSIDE" />
+                  <ImageView fitHeight="38.0" fitWidth="35.0" layoutX="43.0" layoutY="15.0">
+                     <image>
+                        <Image url="@../../../Images%20for%20agapay/erasebg-transformed.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="profileLogoutButton" layoutX="1190.0" layoutY="12.0" mnemonicParsing="false" onAction="#checkProfileLogoutHandler" prefHeight="48.0" prefWidth="50.0" style="-fx-background-color: white; -fx-background-radius: 200; -fx-border-radius: 200; -fx-border-color: black;">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <ImageView fitHeight="576.0" fitWidth="1270.0" layoutY="68.0">
+                     <image>
+                        <Image url="@../../../Images%20for%20agapay/xml%20version=1.0%20encoding=UTF-8%20import%20javafx.scene.layout.Pane%20Pane%20layoutY=235.0%20prefHeight=405.0%20prefWidth=1270.0%20xmlns=httpjavafx.comjavafx23.0.1%20xmlnsfx=httpjavafx.comfxml1%20%20(6).png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="adminButton" alignment="BASELINE_LEFT" layoutX="75.0" layoutY="438.0" mnemonicParsing="false" onAction="#goToAdminCrudHandler" prefHeight="75.0" prefWidth="467.0" style="-fx-background-color: #81D4FA; -fx-background-radius: 10;" text="Admin" textFill="#363636">
+                     <font>
+                        <Font name="Segoe UI Bold" size="25.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button fx:id="inventoryButton" alignment="BASELINE_LEFT" layoutX="75.0" layoutY="245.0" mnemonicParsing="false" onAction="#goToInventoryTableHandler" prefHeight="75.0" prefWidth="467.0" style="-fx-background-color: #81D4FA; -fx-background-radius: 10;" text="Inventory">
+                     <font>
+                        <Font name="Segoe UI Bold" size="25.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button fx:id="historyButton" alignment="BASELINE_LEFT" layoutX="75.0" layoutY="343.0" mnemonicParsing="false" onAction="#goToHistoryTableHandler" prefHeight="75.0" prefWidth="467.0" style="-fx-background-color: #81D4FA; -fx-background-radius: 10;" text="History">
+                     <font>
+                        <Font name="Segoe UI Bold" size="25.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Line endX="1169.0" endY="-7.62939453125E-6" fill="BLACK" layoutX="99.0" layoutY="67.0" startX="-100.0" strokeType="OUTSIDE">
+                     <effect>
+                        <MotionBlur />
+                     </effect>
+                  </Line>
+                  <Button fx:id="distributeButton" alignment="BASELINE_LEFT" layoutX="75.0" layoutY="148.0" mnemonicParsing="false" onAction="#goToDistributeTableHandler" prefHeight="75.0" prefWidth="467.0" style="-fx-background-color: #81D4FA; -fx-background-radius: 10;" text="Distribute">
+                     <font>
+                        <Font name="Segoe UI Bold" size="25.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <ImageView fx:id="slideshowImageView" fitHeight="249.0" fitWidth="443.0" layoutX="703.0" layoutY="335.0" pickOnBounds="true" preserveRatio="false" />
+                  <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="1193.0" layoutY="14.0" mouseTransparent="true">
+                     <image>
+                        <Image url="@../../../Images%20for%20agapay/user%20(4).png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="472.0" layoutY="360.0">
+                     <image>
+                        <Image url="@../../../Images%20for%20agapay/history.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="474.0" layoutY="454.0">
+                     <image>
+                        <Image url="@../../../Images%20for%20agapay/user%20(5).png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="48.0" fitWidth="50.0" layoutX="469.0" layoutY="162.0">
+                     <image>
+                        <Image url="@../../../Images%20for%20agapay/distribution.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="44.0" fitWidth="50.0" layoutX="472.0" layoutY="261.0">
+                     <image>
+                        <Image url="@../../../Images%20for%20agapay/inventory%20(1).png" />
+                     </image>
+                  </ImageView>
+                  <HBox layoutX="805.0" layoutY="23.0" prefHeight="26.0" prefWidth="367.0">
+                     <children>
+                        <Label fx:id="adminNameLabel" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="389.0" text="Welcome!" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Segoe UI Bold" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="1226.0" layoutY="35.0">
+                     <image>
+                        <Image url="@../../../Images%20for%20agapay/pen.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="14.0" layoutY="609.0" text="© Agapay 2025. All rights reserved." />
+               </children></Pane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
