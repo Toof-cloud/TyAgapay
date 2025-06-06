@@ -41,24 +41,29 @@
                               <Font name="Segoe UI Bold" size="25.0" />
                            </font>
                         </Label>
-                        <VBox layoutX="4.0" layoutY="289.0" prefHeight="109.0" prefWidth="140.0">
+                        <VBox layoutX="4.0" layoutY="289.0" prefHeight="186.0" prefWidth="140.0">
                            <children>
                               <StackPane prefHeight="67.0" prefWidth="155.0">
                                  <children>
-                                    <Button fx:id="goToInventoryButton" mnemonicParsing="false" onAction="#goToInventoryButtonHandler" prefHeight="49.0" prefWidth="155.0" style="-fx-background-color: #81D4FA;" text="Inventory">
+                                    <Button fx:id="goToRegisterButton" mnemonicParsing="false" onAction="#goToRegisterButtonHandler" prefHeight="55.0" prefWidth="140.0" style="-fx-background-color: #81D4FA;" text="Register">
                                        <font>
-                                          <Font name="Calibri Bold" size="15.0" />
+                                          <Font name="Segoe UI Bold" size="15.0" />
                                        </font>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
-                                       <graphic>
-                                          <ImageView fitHeight="17.0" fitWidth="18.0" mouseTransparent="true">
-                                             <image>
-                                                <Image url="@../../../Images%20for%20agapay/inventory-alt.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </StackPane>
+                              <StackPane prefHeight="67.0" prefWidth="155.0">
+                                 <children>
+                                    <Button fx:id="goToInventoryButton" mnemonicParsing="false" onAction="#goToInventoryButtonHandler" prefHeight="55.0" prefWidth="140.0" style="-fx-background-color: #81D4FA;" text="Inventory">
+                                       <font>
+                                          <Font name="Segoe UI Bold" size="15.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </Button>
                                  </children>
                               </StackPane>
@@ -66,18 +71,11 @@
                                  <children>
                                     <Button fx:id="goToHistoryButton" mnemonicParsing="false" onAction="#goToHistoryButtonHandler" prefHeight="56.0" prefWidth="155.0" style="-fx-background-color: #81D4FA;" text="History">
                                        <font>
-                                          <Font name="Calibri Bold" size="15.0" />
+                                          <Font name="SansSerif Bold" size="15.0" />
                                        </font>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
-                                       <graphic>
-                                          <ImageView fitHeight="17.0" fitWidth="18.0" mouseTransparent="true">
-                                             <image>
-                                                <Image url="@../../../../../Downloads/time-past.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
                                     </Button>
                                  </children>
                               </StackPane>

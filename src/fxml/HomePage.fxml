@@ -42,21 +42,21 @@
                         <Image url="@../../../Images%20for%20agapay/xml%20version=1.0%20encoding=UTF-8%20import%20javafx.scene.layout.Pane%20Pane%20layoutY=235.0%20prefHeight=405.0%20prefWidth=1270.0%20xmlns=httpjavafx.comjavafx23.0.1%20xmlnsfx=httpjavafx.comfxml1%20%20(6).png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="adminButton" alignment="BASELINE_LEFT" layoutX="75.0" layoutY="438.0" mnemonicParsing="false" onAction="#goToAdminCrudHandler" prefHeight="75.0" prefWidth="467.0" style="-fx-background-color: #81D4FA; -fx-background-radius: 10;" text="Admin" textFill="#363636">
+                  <Button fx:id="adminButton" alignment="BASELINE_LEFT" layoutX="52.0" layoutY="403.0" mnemonicParsing="false" onAction="#goToAdminCrudHandler" prefHeight="113.0" prefWidth="242.0" style="-fx-background-color: #81D4FA; -fx-background-radius: 0; -fx-border-color: #D3D3D3;" textFill="#363636">
                      <font>
                         <Font name="Segoe UI Bold" size="25.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button fx:id="inventoryButton" alignment="BASELINE_LEFT" layoutX="75.0" layoutY="245.0" mnemonicParsing="false" onAction="#goToInventoryTableHandler" prefHeight="75.0" prefWidth="467.0" style="-fx-background-color: #81D4FA; -fx-background-radius: 10;" text="Inventory">
+                  <Button fx:id="inventoryButton" alignment="BASELINE_LEFT" layoutX="53.0" layoutY="267.0" mnemonicParsing="false" onAction="#goToInventoryTableHandler" prefHeight="113.0" prefWidth="242.0" style="-fx-background-color: #81D4FA; -fx-background-radius: 0; -fx-border-color: #D3D3D3;">
                      <font>
                         <Font name="Segoe UI Bold" size="25.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button fx:id="historyButton" alignment="BASELINE_LEFT" layoutX="75.0" layoutY="343.0" mnemonicParsing="false" onAction="#goToHistoryTableHandler" prefHeight="75.0" prefWidth="467.0" style="-fx-background-color: #81D4FA; -fx-background-radius: 10;" text="History">
+                  <Button fx:id="historyButton" alignment="BASELINE_LEFT" layoutX="332.0" layoutY="267.0" mnemonicParsing="false" onAction="#goToHistoryTableHandler" prefHeight="113.0" prefWidth="242.0" style="-fx-background-color: #81D4FA; -fx-background-radius: 5; -fx-border-color: #D3D3D3;">
                      <font>
                         <Font name="Segoe UI Bold" size="25.0" />
                      </font>
@@ -68,7 +68,7 @@
                         <MotionBlur />
                      </effect>
                   </Line>
-                  <Button fx:id="distributeButton" alignment="BASELINE_LEFT" layoutX="75.0" layoutY="148.0" mnemonicParsing="false" onAction="#goToDistributeTableHandler" prefHeight="75.0" prefWidth="467.0" style="-fx-background-color: #81D4FA; -fx-background-radius: 10;" text="Distribute">
+                  <Button fx:id="distributeButton" alignment="BASELINE_LEFT" layoutX="53.0" layoutY="137.0" mnemonicParsing="false" onAction="#goToDistributeTableHandler" prefHeight="113.0" prefWidth="242.0" style="-fx-background-color: #81D4FA; -fx-background-radius: 0; -fx-border-color: #D3D3D3;">
                      <font>
                         <Font name="Segoe UI Bold" size="25.0" />
                      </font>
@@ -82,31 +82,11 @@
                         <Image url="@../../../Images%20for%20agapay/user%20(4).png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="472.0" layoutY="360.0">
-                     <image>
-                        <Image url="@../../../Images%20for%20agapay/history.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="474.0" layoutY="454.0">
-                     <image>
-                        <Image url="@../../../Images%20for%20agapay/user%20(5).png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="48.0" fitWidth="50.0" layoutX="469.0" layoutY="162.0">
-                     <image>
-                        <Image url="@../../../Images%20for%20agapay/distribution.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="44.0" fitWidth="50.0" layoutX="472.0" layoutY="261.0">
-                     <image>
-                        <Image url="@../../../Images%20for%20agapay/inventory%20(1).png" />
-                     </image>
-                  </ImageView>
-                  <HBox layoutX="805.0" layoutY="23.0" prefHeight="26.0" prefWidth="367.0">
+                  <HBox layoutX="815.0" layoutY="23.0" prefHeight="26.0" prefWidth="367.0">
                      <children>
                         <Label fx:id="adminNameLabel" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="389.0" text="Welcome!" HBox.hgrow="ALWAYS">
                            <font>
-                              <Font name="Segoe UI Bold" size="20.0" />
+                              <Font name="Arial Bold" size="20.0" />
                            </font>
                         </Label>
                      </children>
@@ -117,6 +97,89 @@
                      </image>
                   </ImageView>
                   <Label layoutX="14.0" layoutY="609.0" text="© Agapay 2025. All rights reserved." />
+                  <Button fx:id="registerButton" alignment="BASELINE_LEFT" layoutX="332.0" layoutY="137.0" mnemonicParsing="false" onAction="#goToRegisterTableHandler" prefHeight="113.0" prefWidth="242.0" style="-fx-background-color: #81D4FA; -fx-border-color: #D3D3D3; -fx-background-radius: 0;">
+                     <font>
+                        <Font name="Segoe UI Bold" size="25.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Label layoutX="126.0" layoutY="157.0" mouseTransparent="true" text="Distribute">
+                     <font>
+                        <Font name="Segoe UI Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="127.0" layoutY="282.0" mouseTransparent="true" text="Inventory">
+                     <font>
+                        <Font name="Segoe UI Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="406.0" layoutY="157.0" mouseTransparent="true" text="Register">
+                     <font>
+                        <Font name="Segoe UI Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="126.0" layoutY="424.0" mouseTransparent="true" text="Admin">
+                     <font>
+                        <Font name="Segoe UI Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="406.0" layoutY="282.0" mouseTransparent="true" text="History">
+                     <font>
+                        <Font name="Segoe UI Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Text layoutX="128.0" layoutY="198.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage and assign supplies or resources to recipients." wrappingWidth="141.4107666015625" />
+                  <Pane layoutX="54.0" layoutY="137.5" mouseTransparent="true" prefHeight="113.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3;">
+                     <children>
+                        <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="14.0" layoutY="14.0" mouseTransparent="true">
+                           <image>
+                              <Image url="@../../../Images%20for%20agapay/distribution.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="54.0" layoutY="267.5" mouseTransparent="true" prefHeight="113.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3;">
+                     <children>
+                        <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="14.0" layoutY="14.0" mouseTransparent="true">
+                           <image>
+                              <Image url="@../../../Images%20for%20agapay/inventory%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Text layoutX="128.0" layoutY="323.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Track and manage available items or stock levels." wrappingWidth="141.4107666015625" />
+                  <Pane layoutX="333.0" layoutY="137.5" mouseTransparent="true" prefHeight="113.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3;">
+                     <children>
+                        <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="17.0" layoutY="15.0" mouseTransparent="true">
+                           <image>
+                              <Image url="@../../../../../Downloads/edit%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Text layoutX="406.0" layoutY="198.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new entries, such as users or beneficiaries, into the system." wrappingWidth="141.4107666015625" />
+                  <Pane layoutX="333.0" layoutY="268.0" mouseTransparent="true" prefHeight="113.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3;">
+                     <children>
+                        <ImageView fitHeight="34.0" fitWidth="35.0" layoutX="14.0" layoutY="14.0" mouseTransparent="true">
+                           <image>
+                              <Image url="@../../../Images%20for%20agapay/history.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Text layoutX="406.0" layoutY="325.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="View past distributions." wrappingWidth="141.4107666015625" />
+                  <Pane layoutX="53.0" layoutY="403.5" mouseTransparent="true" prefHeight="113.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3;">
+                     <children>
+                        <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="14.0" layoutY="19.0">
+                           <image>
+                              <Image url="@../../../Images%20for%20agapay/user%20(5).png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Text layoutX="128.0" layoutY="463.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Access administrative settings and manage user permissions." wrappingWidth="141.4107666015625" />
                </children></Pane>
          </children>
       </VBox>

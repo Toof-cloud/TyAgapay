@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1270.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DistributeTableController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1270.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RegisterTableController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -21,7 +21,7 @@
                <children>
                   <Pane layoutX="147.0" prefHeight="51.0" prefWidth="1123.0" style="-fx-background-color: #001F54;">
                      <children>
-                        <Label layoutX="21.0" layoutY="14.0" prefHeight="24.0" prefWidth="99.0" text="Distribute" textFill="WHITE">
+                        <Label layoutX="21.0" layoutY="14.0" prefHeight="24.0" prefWidth="99.0" text="Register" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Bold" size="20.0" />
                            </font>
@@ -45,7 +45,7 @@
                            <children>
                               <StackPane prefHeight="67.0" prefWidth="155.0">
                                  <children>
-                                    <Button fx:id="goToRegisterButton" mnemonicParsing="false" onAction="#goToRegisterButtonHandler" prefHeight="55.0" prefWidth="140.0" style="-fx-background-color: #81D4FA;" text="Register">
+                                    <Button fx:id="goToDistributeButton" mnemonicParsing="false" onAction="#goToDistributeButtonHandler" prefHeight="55.0" prefWidth="140.0" style="-fx-background-color: #81D4FA;" text="Distribute">
                                        <font>
                                           <Font name="Segoe UI Bold" size="15.0" />
                                        </font>

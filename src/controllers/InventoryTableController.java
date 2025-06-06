@@ -18,15 +18,14 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class InventoryTableController implements Initializable {
-        @FXML
+    @FXML
     private Button goToDistributeButton;
-
+    @FXML
+    private Button goToRegisterButton;
     @FXML
     private Button goToHistoryButton;
-
     @FXML
     private Button returnToHomePageButton;
-
     @FXML
     private TextField searchTextField;
 
@@ -36,12 +35,29 @@ public class InventoryTableController implements Initializable {
         addGlowEffect(goToDistributeButton);
         addGlowEffect(goToHistoryButton);
         addGlowEffect(returnToHomePageButton);
+        addGlowEffect(goToRegisterButton);
     }
     
     @FXML
     private void goToDistributeButtonHandler(ActionEvent event) throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DistributeTablePage.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage from the event source (the button)
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void goToRegisterButtonHandler(ActionEvent event) throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RegisterTablePage.fxml"));
             Parent root = loader.load();
 
             // Get the current stage from the event source (the button)

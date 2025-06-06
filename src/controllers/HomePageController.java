@@ -34,6 +34,9 @@ public class HomePageController {
     private Button distributeButton;
 
     @FXML
+    private Button registerButton;
+
+    @FXML
     private Button historyButton;
 
     @FXML
@@ -85,6 +88,7 @@ public class HomePageController {
         addGlowEffect(distributeButton);
         addGlowEffect(historyButton);
         addGlowEffect(profileLogoutButton);
+        addGlowEffect(registerButton);
 
         if (homeRoot != null) {
         homeRoot.setOnMouseClicked(e -> {
@@ -129,6 +133,23 @@ public class HomePageController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void goToRegisterTableHandler(ActionEvent event) throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RegisterTablePage.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage from the event source (the button)
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     public void goToInventoryTableHandler(ActionEvent event) throws IOException {
         try {

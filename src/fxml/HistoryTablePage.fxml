@@ -42,43 +42,41 @@
                               <Font name="Segoe UI Bold" size="25.0" />
                            </font>
                         </Label>
-                        <VBox layoutX="4.0" layoutY="289.0" prefHeight="109.0" prefWidth="140.0">
+                        <VBox layoutX="4.0" layoutY="289.0" prefHeight="186.0" prefWidth="140.0">
                            <children>
                               <StackPane prefHeight="67.0" prefWidth="155.0">
                                  <children>
                                     <Button fx:id="goToDistributeButton" mnemonicParsing="false" onAction="#goToDistributeButtonHandler" prefHeight="49.0" prefWidth="155.0" style="-fx-background-color: #81D4FA;" text="Distribute">
                                        <font>
-                                          <Font name="Calibri Bold" size="15.0" />
+                                          <Font name="Segoe UI Bold" size="15.0" />
                                        </font>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
-                                       <graphic>
-                                          <ImageView fitHeight="17.0" fitWidth="18.0" mouseTransparent="true">
-                                             <image>
-                                                <Image url="@../../../../../Downloads/warehouse-alt.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
                                     </Button>
                                  </children>
                               </StackPane>
                               <StackPane prefHeight="67.0" prefWidth="155.0">
                                  <children>
-                                    <Button fx:id="goToInventoryButton" mnemonicParsing="false" onAction="#goToInventoryButtonHandler" prefHeight="56.0" prefWidth="155.0" style="-fx-background-color: #81D4FA;" text="Inventory">
+                                    <Button fx:id="goToRegisterButton" mnemonicParsing="false" onAction="#goToRegisterButtonHandler" prefHeight="49.0" prefWidth="155.0" style="-fx-background-color: #81D4FA;" text="Register">
                                        <font>
-                                          <Font name="Calibri Bold" size="15.0" />
+                                          <Font name="Segoe UI Bold" size="15.0" />
                                        </font>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
-                                       <graphic>
-                                          <ImageView fitHeight="17.0" fitWidth="18.0" mouseTransparent="true">
-                                             <image>
-                                                <Image url="@../../../../../Downloads/inventory-alt.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </StackPane>
+                              <StackPane prefHeight="67.0" prefWidth="155.0">
+                                 <children>
+                                    <Button fx:id="goToInventoryButton" mnemonicParsing="false" onAction="#goToInventoryButtonHandler" prefHeight="67.0" prefWidth="155.0" style="-fx-background-color: #81D4FA;" text="Inventory">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Segoe UI Bold" size="15.0" />
+                                       </font>
                                     </Button>
                                  </children>
                               </StackPane>

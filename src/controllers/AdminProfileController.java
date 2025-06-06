@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
@@ -50,6 +51,9 @@ public class AdminProfileController implements Initializable{
     @FXML
     private Button cancelButton;
 
+    @FXML
+    private Label displayAdminID;
+
     private Admin originalAdmin;
 
 
@@ -73,6 +77,7 @@ public class AdminProfileController implements Initializable{
     }
 
     private void loadAdminData(Admin admin) {
+        displayAdminID.setText(admin.getAdminID());
         firstNameField.setText(admin.getAdminfirstname());
         lastNameField.setText(admin.getAdminlastname());
         contactField.setText(admin.getContact());

@@ -18,7 +18,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DistributeTableController implements Initializable {
-
+    @FXML
+    private Button goToRegisterButton;
     @FXML
     private Button goToHistoryButton;
     @FXML
@@ -34,8 +35,24 @@ public class DistributeTableController implements Initializable {
         addGlowEffect(goToHistoryButton);
         addGlowEffect(goToInventoryButton);
         addGlowEffect(returnToHomePageButton);
+        addGlowEffect(goToRegisterButton);
     }
     // Other @FXML fields and methods
+    @FXML
+    private void goToRegisterButtonHandler(ActionEvent event) throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RegisterTablePage.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage from the event source (the button)
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void goToInventoryButtonHandler(ActionEvent event) throws IOException {
         try {
