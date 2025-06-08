@@ -47,8 +47,20 @@ public class DatabaseHandler {
         return result;
     }
 
+    private static String loggedInBaranggay = null;
+
+    public static void setLoggedInBaranggay(String baranggay) {
+    loggedInBaranggay = baranggay;
+    }
+    public static String getLoggedInBaranggay() {
+    return loggedInBaranggay;
+
+    }
     public static Admin validateLogin(String username, String password) {
-    String query = "SELECT * FROM admin_officials WHERE ((BINARY gmail = ?) OR (BINARY contact = ?)) AND adminpassword = ?";
+    String query = "SELECT ao.*, b.name AS barangay_name " +
+                   "FROM admin_officials ao " +
+                   "JOIN barangays b ON ao.barangay_id = b.barangay_id " +
+                   "WHERE ((BINARY ao.gmail = ?) OR (BINARY ao.contact = ?)) AND ao.adminpassword = ?";
     try (Connection conn = getDBConnection();
          PreparedStatement stmt = conn.prepareStatement(query)) {
         stmt.setString(1, username);
@@ -56,10 +68,13 @@ public class DatabaseHandler {
         stmt.setString(3, password);
         ResultSet rs = stmt.executeQuery();
         if (rs.next()) {
+            // Save the barangay_id for filtering
+            setLoggedInBaranggay(rs.getString("barangay_id"));
             return new Admin(
                 rs.getString("admin_id"),
                 rs.getString("adminfirstname"),
                 rs.getString("adminlastname"),
+                rs.getString("barangay_name"), // Use barangay name for display
                 rs.getString("official_type"),
                 rs.getString("adminpassword"),
                 rs.getString("contact"),
@@ -73,63 +88,22 @@ public class DatabaseHandler {
     return null;
 }
     public static ResultSet getAdmins() {
-        getInstance();
-        ResultSet result = null;
-
-        try {
-            String query = "SELECT * FROM admin_officials";
-            result = getInstance().execQuery(query);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-
-    public static boolean addAdmin(Admin admin) {
-    String query = "INSERT INTO admin_officials (adminfirstname, adminlastname, official_type, adminpassword, contact, gmail) VALUES (?, ?, ?, ?, ?, ?)";
-    try (Connection conn = getDBConnection();
-         PreparedStatement stmt = conn.prepareStatement(query)) {
-        stmt.setString(1, admin.getAdminfirstname());
-        stmt.setString(2, admin.getAdminlastname());
-        stmt.setString(3, admin.getOfficial_type());
-        stmt.setString(4, admin.getAdminpassword());
-        stmt.setString(5, admin.getContact());
-        stmt.setString(6, admin.getGmail());
-        int rows = stmt.executeUpdate();
-        return rows > 0;
-    } catch (SQLIntegrityConstraintViolationException e) {
-        // Duplicate entry for contact or gmail
-        System.err.println("Duplicate contact or gmail.");
-        // Optionally, show a user-friendly message in your UI
-    } catch (SQLException e) {
-        // Enum or other SQL error
-        System.err.println("SQL Error: " + e.getMessage());
+    getInstance();
+    ResultSet result = null;
+    try {
+        String query = "SELECT ao.*, b.name AS barangay_name " +
+                       "FROM admin_officials ao " +
+                       "JOIN barangays b ON ao.barangay_id = b.barangay_id " +
+                       "WHERE ao.barangay_id = ?";
+        Connection conn = getDBConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1, getLoggedInBaranggay()); // This should be the barangay_id
+        result = stmt.executeQuery();
     } catch (Exception e) {
         e.printStackTrace();
     }
-    return false;
+    return result;
 }
-
-    public static boolean editAdmin(Admin admin) {
-        getInstance();
-        String query = "UPDATE admin_officials SET adminfirstname = ?, adminlastname = ?, official_type = ?, adminpassword = ?, contact = ?, gmail = ? WHERE admin_id = ?";
-        try (Connection conn = getDBConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, admin.getAdminfirstname());
-            stmt.setString(2, admin.getAdminlastname());
-            stmt.setString(3, admin.getOfficial_type());
-            stmt.setString(4, admin.getAdminpassword());
-            stmt.setString(5, admin.getContact());
-            stmt.setString(6, admin.getGmail());
-            stmt.setString(7, admin.getAdminID());
-            int rows = stmt.executeUpdate();
-            return rows > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 
     public static boolean deleteAdmin(String adminId) {
         getInstance();
@@ -144,4 +118,26 @@ public class DatabaseHandler {
             return false;
         }
     }
+
+    //citizen
+    public static ResultSet getCitizens() {
+    getInstance();
+    ResultSet result = null;
+    try {
+        String query = "SELECT c.*, b.name AS barangay_name, ci.name AS city_name, r.name AS region_name, co.name AS country_name " +
+                       "FROM citizens c " +
+                       "JOIN barangays b ON c.barangay_id = b.barangay_id " +
+                       "JOIN cities ci ON c.city_id = ci.city_id " +
+                       "JOIN regions r ON c.region_id = r.region_id " +
+                       "JOIN countries co ON c.country_id = co.country_id " +
+                       "WHERE c.barangay_id = ?";
+        Connection conn = getDBConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1, getLoggedInBaranggay()); // Only citizens from the logged-in official's barangay
+        result = stmt.executeQuery();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return result;
+}
 }

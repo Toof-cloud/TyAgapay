@@ -21,71 +21,81 @@
                <children>
                   <Pane layoutY="242.0" prefHeight="398.0" prefWidth="1270.0" style="-fx-background-color: #010a5b;">
                      <children>
-                        <Pane layoutX="399.0" layoutY="-169.0" prefHeight="470.0" prefWidth="473.0" style="-fx-background-color: white; -fx-border-color: black;">
+                        <Pane layoutX="399.0" layoutY="-181.0" prefHeight="525.0" prefWidth="473.0" style="-fx-background-color: white; -fx-border-color: black;">
                            <children>
                               <Label layoutX="18.0" layoutY="14.0" text="PROFILE">
                                  <font>
                                     <Font name="Segoe UI Bold" size="30.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="firstNameField" layoutX="152.0" layoutY="111.0" prefHeight="25.0" prefWidth="274.0" style="-fx-background-color: white; -fx-border-color: #bababa;" />
-                              <ComboBox fx:id="officialTypeBox" layoutX="152.0" layoutY="207.0" prefHeight="28.0" prefWidth="274.0" promptText="Official_Type" style="-fx-background-color: white; -fx-border-color: #bababa;" />
-                              <Label layoutX="44.0" layoutY="117.0" text="First Name:">
+                              <TextField fx:id="firstNameField" layoutX="152.0" layoutY="137.0" prefHeight="25.0" prefWidth="274.0" style="-fx-background-color: white; -fx-border-color: #bababa;" />
+                              <ComboBox fx:id="officialTypeBox" layoutX="152.0" layoutY="233.0" prefHeight="28.0" prefWidth="274.0" promptText="Official_Type" style="-fx-background-color: white; -fx-border-color: #bababa;" />
+                              <Label layoutX="44.0" layoutY="143.0" text="First Name:">
                                  <font>
                                     <Font name="Segoe UI Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <Line endX="280.66668701171875" endY="1.52587890625E-5" layoutX="145.0" layoutY="149.0" startX="-100.0" stroke="#bababa" />
-                              <TextField fx:id="lastNameField" layoutX="152.0" layoutY="159.0" prefHeight="25.0" prefWidth="274.0" style="-fx-background-color: white; -fx-border-color: #bababa;" />
-                              <Line endX="280.66668701171875" endY="1.52587890625E-5" layoutX="146.0" layoutY="197.0" startX="-100.0" stroke="#bababa" />
-                              <Label layoutX="44.0" layoutY="164.0" text="Last Name:">
+                              <Line endX="280.66668701171875" endY="1.52587890625E-5" layoutX="145.0" layoutY="175.0" startX="-100.0" stroke="#bababa" />
+                              <TextField fx:id="lastNameField" layoutX="152.0" layoutY="185.0" prefHeight="25.0" prefWidth="274.0" style="-fx-background-color: white; -fx-border-color: #bababa;" />
+                              <Line endX="280.66668701171875" endY="1.52587890625E-5" layoutX="146.0" layoutY="223.0" startX="-100.0" stroke="#bababa" />
+                              <Label layoutX="44.0" layoutY="191.0" text="Last Name:">
                                  <font>
                                     <Font name="Segoe UI Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="passwordField" layoutX="152.0" layoutY="256.0" prefHeight="25.0" prefWidth="274.0" style="-fx-background-color: white; -fx-border-color: #bababa;" />
-                              <Label layoutX="45.0" layoutY="212.0" text="Official Type:">
+                              <TextField fx:id="passwordField" layoutX="152.0" layoutY="281.0" prefHeight="25.0" prefWidth="274.0" style="-fx-background-color: white; -fx-border-color: #bababa;" />
+                              <Label layoutX="45.0" layoutY="238.0" text="Official Type:">
                                  <font>
                                     <Font name="Segoe UI Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <Line endX="280.66668701171875" endY="1.52587890625E-5" layoutX="146.0" layoutY="245.0" startX="-100.0" stroke="#bababa" />
-                              <Line endX="280.66668701171875" endY="1.52587890625E-5" layoutX="145.0" layoutY="294.0" startX="-100.0" stroke="#bababa" />
-                              <Label layoutX="46.0" layoutY="261.0" text="Password:">
+                              <Line endX="280.66668701171875" endY="1.52587890625E-5" layoutX="146.0" layoutY="271.0" startX="-100.0" stroke="#bababa" />
+                              <Line endX="280.66668701171875" endY="1.52587890625E-5" layoutX="145.0" layoutY="319.0" startX="-100.0" stroke="#bababa" />
+                              <Label layoutX="46.0" layoutY="285.0" text="Password:">
                                  <font>
                                     <Font name="Segoe UI Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="contactField" layoutX="152.0" layoutY="302.0" prefHeight="25.0" prefWidth="274.0" style="-fx-background-color: white; -fx-border-color: #bababa;" />
-                              <Label layoutX="45.0" layoutY="308.0" text="Contact:">
+                              <TextField fx:id="contactField" layoutX="152.0" layoutY="330.0" prefHeight="25.0" prefWidth="274.0" style="-fx-background-color: white; -fx-border-color: #bababa;" />
+                              <Label layoutX="45.0" layoutY="335.0" text="Contact:">
                                  <font>
                                     <Font name="Segoe UI Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <Line endX="280.66668701171875" endY="1.52587890625E-5" layoutX="145.0" layoutY="339.0" startX="-100.0" stroke="#bababa" />
-                              <TextField fx:id="gmailField" layoutX="152.0" layoutY="349.0" prefHeight="25.0" prefWidth="274.0" style="-fx-background-color: white; -fx-border-color: #bababa;" />
-                              <Label layoutX="46.0" layoutY="352.0" text="Gmail:">
+                              <Line endX="280.66668701171875" endY="1.52587890625E-5" layoutX="146.0" layoutY="368.0" startX="-100.0" stroke="#bababa" />
+                              <TextField fx:id="gmailField" layoutX="152.0" layoutY="378.0" prefHeight="25.0" prefWidth="274.0" style="-fx-background-color: white; -fx-border-color: #bababa;" />
+                              <Label layoutX="46.0" layoutY="383.0" text="Gmail:">
                                  <font>
                                     <Font name="Segoe UI Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="saveButton" layoutX="248.0" layoutY="408.0" mnemonicParsing="false" onAction="#saveButtonHandler" prefHeight="30.0" prefWidth="178.0" style="-fx-background-color: #27AE60;" text="Save" textFill="WHITE">
+                              <Button fx:id="saveButton" layoutX="248.0" layoutY="438.0" mnemonicParsing="false" onAction="#saveButtonHandler" prefHeight="30.0" prefWidth="178.0" style="-fx-background-color: #27AE60;" text="Save" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Bold" size="15.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="cancelButton" layoutX="48.0" layoutY="408.0" mnemonicParsing="false" onAction="#cancelButtonHandler" prefHeight="30.0" prefWidth="178.0" style="-fx-background-color: #C0392B;" text="Cancel" textFill="WHITE">
+                              <Button fx:id="cancelButton" layoutX="46.0" layoutY="438.0" mnemonicParsing="false" onAction="#cancelButtonHandler" prefHeight="30.0" prefWidth="178.0" style="-fx-background-color: #C0392B;" text="Cancel" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Bold" size="15.0" />
                                  </font>
                               </Button>
-                              <Label layoutX="44.0" layoutY="74.0" text="Admin ID:">
+                              <Label layoutX="44.0" layoutY="70.0" text="Admin ID:">
                                  <font>
                                     <Font name="Segoe UI Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <Line endX="280.66668701171875" endY="1.52587890625E-5" layoutX="145.0" layoutY="101.0" startX="-100.0" stroke="#bababa" />
-                              <Label fx:id="displayAdminID" layoutX="152.0" layoutY="73.0" text="Label">
+                              <Line endX="280.66668701171875" endY="1.52587890625E-5" layoutX="145.0" layoutY="128.0" startX="-100.0" stroke="#bababa" />
+                              <Label fx:id="displayAdminID" layoutX="152.0" layoutY="68.0" text="Label">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="43.0" layoutY="101.0" text="Baranggay Location:">
+                                 <font>
+                                    <Font name="Segoe UI Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="displayLocation" layoutX="182.0" layoutY="101.0" text="Label">
                                  <font>
                                     <Font size="13.0" />
                                  </font>

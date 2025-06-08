@@ -20,4 +20,10 @@ public class AdminSession {
     public Admin getAdmin() {
         return admin;
     }
+    public String getAdminBaranggay(){
+        if (admin != null) {
+            return admin.getBaranggay();
+        }
+        return null;
+    }
 }

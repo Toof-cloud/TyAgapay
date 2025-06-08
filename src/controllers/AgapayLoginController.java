@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Admin;
@@ -24,23 +25,19 @@ public class AgapayLoginController {
 
     @FXML
     private Button adminLoginButton;
-
     @FXML
-    private TextField adminPasswordTextField;
-
+    private Button showPasswordButton;
     @FXML
     private TextField adminUsernameTextField;
-
     @FXML
-    private Button createNewAdmin;
-
+    private PasswordField adminPasswordTextField;
     @FXML
-    private Button forgotPassButton;
+    private TextField adminPasswordVisibleTextField;
 
+    private boolean isPasswordVisible = false;
     private Stage stage;
     private Scene scene;
     private Parent root;
-
     private Stage createAccountStage = null;
 
     @FXML
@@ -50,9 +47,14 @@ public class AgapayLoginController {
     public void initialize() {
         //initialize the buttons with glow effects
         addGlowEffect(adminLoginButton);
-        addGlowEffect(createNewAdmin);
-        addGlowEffect(forgotPassButton);
-
+ 
+        addGlowEffect(showPasswordButton);
+       
+        adminPasswordTextField.textProperty().addListener((obs, oldVal, newVal) -> {
+        if (!isPasswordVisible) {
+            adminPasswordVisibleTextField.setText(newVal);
+        }
+    });
         if (homeRoot != null) {
         homeRoot.setOnMouseClicked(e -> {
             if (createAccountStage != null && createAccountStage.isShowing()) {
@@ -61,9 +63,32 @@ public class AgapayLoginController {
         });
         }
     }
+
+    @FXML
+    private void togglePasswordVisibility(ActionEvent event) throws IOException{
+    if (isPasswordVisible) {
+        // Switch to PasswordField
+        adminPasswordTextField.setText(adminPasswordVisibleTextField.getText());
+        adminPasswordTextField.setVisible(true);
+        adminPasswordTextField.setManaged(true);
+
+        adminPasswordVisibleTextField.setVisible(false);
+        adminPasswordVisibleTextField.setManaged(false);
+    } else {
+        // Switch to TextField
+        adminPasswordVisibleTextField.setText(adminPasswordTextField.getText());
+        adminPasswordVisibleTextField.setVisible(true);
+        adminPasswordVisibleTextField.setManaged(true);
+
+        adminPasswordTextField.setVisible(false);
+        adminPasswordTextField.setManaged(false);
+    }
+
+    isPasswordVisible = !isPasswordVisible;
+}
     public void loginButtonHandler(ActionEvent event) throws IOException{
         String username = adminUsernameTextField.getText().trim();
-        String password = adminPasswordTextField.getText().trim();
+        String password = isPasswordVisible ? adminPasswordVisibleTextField.getText().trim() : adminPasswordTextField.getText().trim();
 
         if (username.isEmpty() || password.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Login Failed", "Please enter both username and password.");
@@ -98,28 +123,7 @@ public class AgapayLoginController {
         showAlert(Alert.AlertType.ERROR, "Login Failed", "Incorrect email/contact or password.");
 }
 }    //go to create account page
-    public void createNewAdminHandler(ActionEvent event) throws IOException {
-    try {
-        // Load FXML file for the create account page
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CreateAccount.fxml"));
-        Parent root = loader.load();
-
-        // Create a new stage (window)
-        createAccountStage = new Stage();
-        createAccountStage.initStyle(javafx.stage.StageStyle.UNDECORATED);
-        createAccountStage.setTitle("Create New Admin Account");
-        createAccountStage.setScene(new Scene(root));
-        createAccountStage.setResizable(false);
-
-        // Show the new window in front of the login page
-        createAccountStage.show();
-        createAccountStage.toFront();
-
-    } catch (Exception e) {
-        System.out.println("Error loading CreateAccount.fxml: " + e.getMessage());
-        e.printStackTrace();
-    }
-}
+    
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

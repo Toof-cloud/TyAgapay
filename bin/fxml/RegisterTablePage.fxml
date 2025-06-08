@@ -2,11 +2,14 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -26,6 +29,15 @@
                               <Font name="Segoe UI Bold" size="20.0" />
                            </font>
                         </Label>
+                        <HBox layoutX="742.0" layoutY="13.0" prefHeight="26.0" prefWidth="367.0">
+                           <children>
+                              <Label fx:id="barangayLocation" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="389.0" text="Welcome!" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Arial Bold" size="23.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
                      </children>
                   </Pane>
                   <Pane layoutY="-90.0" prefHeight="730.0" prefWidth="147.0" style="-fx-background-color: #81D4FA;">
@@ -96,11 +108,25 @@
                         <Image url="@../../../Images%20for%20agapay/left-arrow.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="searchTextField" layoutX="945.0" layoutY="69.0" prefHeight="24.0" prefWidth="303.0" promptText="Search" style="-fx-border-color: light grey; -fx-background-radius: 5; -fx-border-radius: 5;">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
+                  <ComboBox layoutX="335.0" layoutY="101.0" prefHeight="32.0" prefWidth="150.0" promptText="Valid ID Type" />
+                  <TableView fx:id="citizenTable" layoutX="163.0" layoutY="258.0" prefHeight="369.0" prefWidth="1095.0">
+                    <columns>
+                      <TableColumn fx:id="citizenIDColumn" text="Citizen_ID" />
+                        <TableColumn fx:id="citizenLastNameColumn" prefWidth="110.0" text="Last_Name" />
+                      <TableColumn fx:id="citizenFirstNameColumn" prefWidth="110.0" text="First_Name" />
+                        <TableColumn fx:id="contactColumn" prefWidth="120.0" text="Contact_Num" />
+                        <TableColumn fx:id="maritalStatusColumn" prefWidth="110.0" text="Marital_Status" />
+                        <TableColumn fx:id="householdColumn" prefWidth="95.0" text="Household_No" />
+                        <TableColumn fx:id="validIDTypeColumn" prefWidth="110.0" text="Valid_ID_Type" />
+                        <TableColumn fx:id="validIDCodeColumn" prefWidth="130.0" text="Valid_ID_Code" />
+                        <TableColumn fx:id="houseColumn" text="House_No" />
+                        <TableColumn fx:id="barangayColumn" prefWidth="110.0" text="Barangay_Name" />
+                        <TableColumn fx:id="cityColumn" prefWidth="110.0" text="City_Name" />
+                        <TableColumn fx:id="zipColumn" text="Zip" />
+                        <TableColumn fx:id="regionColumn" prefWidth="110.0" text="Region_Name" />
+                        <TableColumn fx:id="countryColumn" prefWidth="110.0" text="Country_Name" />
+                    </columns>
+                  </TableView>
                </children>
             </Pane>
          </children>

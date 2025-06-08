@@ -4,16 +4,18 @@ public class Admin {
     private SimpleStringProperty admin_id;
     private SimpleStringProperty adminfirstname;
     private SimpleStringProperty adminlastname;
+    private SimpleStringProperty barangay_name;
     private SimpleStringProperty official_type;
     private SimpleStringProperty adminpassword;
     private SimpleStringProperty contact;
     private SimpleStringProperty gmail;
     private SimpleStringProperty created_at;
 
-    public Admin(String admin_id, String adminfirstname, String adminlastname, String official_type, String adminpassword, String contact, String gmail, String created_at) {
+    public Admin(String admin_id, String adminfirstname, String adminlastname, String barangay_name, String official_type, String adminpassword, String contact, String gmail, String created_at) {
         this.admin_id = new SimpleStringProperty(admin_id);
         this.adminfirstname = new SimpleStringProperty(adminfirstname);
         this.adminlastname = new SimpleStringProperty(adminlastname);
+        this.barangay_name = new SimpleStringProperty(barangay_name);
         this.official_type = new SimpleStringProperty(official_type);
         this.adminpassword = new SimpleStringProperty(adminpassword);
         this.contact = new SimpleStringProperty(contact);
@@ -28,6 +30,9 @@ public class Admin {
     }
     public String getAdminlastname() {
         return adminlastname.get();
+    }
+    public String getBaranggay() {
+        return barangay_name.get();
     }
     public String getOfficial_type() {
         return official_type.get();

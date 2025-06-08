@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -25,6 +24,11 @@
                         <Label layoutX="21.0" layoutY="14.0" prefHeight="24.0" prefWidth="255.0" text="Admin Management Panel" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="barangayLocation" alignment="CENTER_RIGHT" layoutX="748.0" layoutY="11.0" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="389.0" text="Welcome!" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Bold" size="23.0" />
                            </font>
                         </Label>
                      </children>
@@ -55,32 +59,17 @@
                   <TableView fx:id="adminTable" layoutX="141.0" layoutY="117.0" prefHeight="503.0" prefWidth="1107.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #333333;">
                     <columns>
                       <TableColumn fx:id="adminIdColumn" prefWidth="88.0" text="Admin_ID" />
-                      <TableColumn fx:id="firstNameColumn" prefWidth="133.3333282470703" text="First Name" />
-                        <TableColumn fx:id="LastNameColumn" prefWidth="133.33331298828125" text="Last Name" />
-                        <TableColumn fx:id="officialTypeColumn" prefWidth="125.3333740234375" text="Official_Type" />
-                        <TableColumn fx:id="passwordColumn" prefWidth="137.3333740234375" text="Password" />
-                        <TableColumn fx:id="contactColumn" prefWidth="142.6666259765625" text="Contact" />
-                        <TableColumn fx:id="gmailColumn" prefWidth="148.0" text="Gmail" />
-                        <TableColumn fx:id="createdAtColumn" prefWidth="203.333251953125" text="Created_At" />
+                      <TableColumn fx:id="firstNameColumn" prefWidth="127.33331298828125" text="First Name" />
+                        <TableColumn fx:id="LastNameColumn" prefWidth="128.0" text="Last Name" />
+                        <TableColumn fx:id="baranggayColumn" prefWidth="115.33331298828125" text="Baranggay" />
+                        <TableColumn fx:id="officialTypeColumn" prefWidth="134.00006103515625" text="Official_Type" />
+                        <TableColumn fx:id="passwordColumn" prefWidth="124.6666259765625" text="Password" />
+                        <TableColumn fx:id="contactColumn" prefWidth="132.0" text="Contact" />
+                        <TableColumn fx:id="gmailColumn" prefWidth="156.0" text="Gmail" />
+                        <TableColumn fx:id="createdAtColumn" prefWidth="184.666748046875" text="Created_At" />
                     </columns>
                   </TableView>
-                  <Button fx:id="addAdminButton" alignment="CENTER_RIGHT" layoutX="993.0" layoutY="69.0" mnemonicParsing="false" onAction="#addBaranggayOfficialHandler" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: #27AE60; -fx-background-radius: 5;" text="Add New Baranggay Official" textFill="WHITE">
-                     <font>
-                        <Font name="Segoe UI Bold" size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="EditAdminButton" alignment="CENTER_RIGHT" layoutX="879.0" layoutY="69.0" mnemonicParsing="false" onAction="#editBaranggayOfficialHandler" prefHeight="31.0" prefWidth="107.0" style="-fx-background-color: #F1C40F; -fx-background-radius: 5;" text="Edit" textFill="WHITE">
-                     <font>
-                        <Font name="Segoe UI Bold" size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="deleteAdminButton" alignment="CENTER_RIGHT" layoutX="772.0" layoutY="69.0" mnemonicParsing="false" onAction="#deleteBaranggayOfficialHandler" prefHeight="31.0" prefWidth="99.0" style="-fx-background-color: #C0392B; -fx-background-radius: 5;" text="Delete" textFill="WHITE">
+                  <Button fx:id="deleteAdminButton" alignment="CENTER_RIGHT" layoutX="1149.0" layoutY="70.0" mnemonicParsing="false" onAction="#deleteBaranggayOfficialHandler" prefHeight="31.0" prefWidth="99.0" style="-fx-background-color: #C0392B; -fx-background-radius: 5;" text="Delete" textFill="WHITE">
                      <font>
                         <Font name="Segoe UI Bold" size="15.0" />
                      </font>
@@ -93,26 +82,11 @@
                         <Image url="@../../../Images%20for%20agapay/left-arrow.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="889.0" layoutY="76.0">
-                     <image>
-                        <Image url="@../../../Images%20for%20agapay/pen.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="780.0" layoutY="77.0">
+                  <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="1155.0" layoutY="77.0">
                      <image>
                         <Image url="@../../../Images%20for%20agapay/trash.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="1003.0" layoutY="77.0">
-                     <image>
-                        <Image url="@../../../../../Downloads/add%20(1).png" />
-                     </image>
-                  </ImageView>
-                  <TextField fx:id="searchTextField" layoutX="461.0" layoutY="69.0" prefHeight="24.0" prefWidth="303.0" promptText="Search" style="-fx-border-color: light grey; -fx-background-radius: 5; -fx-border-radius: 5;">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
                </children>
             </Pane>
          </children>

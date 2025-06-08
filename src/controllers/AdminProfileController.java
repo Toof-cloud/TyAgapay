@@ -54,6 +54,9 @@ public class AdminProfileController implements Initializable{
     @FXML
     private Label displayAdminID;
 
+    @FXML
+    private Label displayLocation;
+
     private Admin originalAdmin;
 
 
@@ -78,6 +81,7 @@ public class AdminProfileController implements Initializable{
 
     private void loadAdminData(Admin admin) {
         displayAdminID.setText(admin.getAdminID());
+        displayLocation.setText(admin.getBaranggay());
         firstNameField.setText(admin.getAdminfirstname());
         lastNameField.setText(admin.getAdminlastname());
         contactField.setText(admin.getContact());
