@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,7 +21,7 @@
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane prefHeight="647.0" prefWidth="1270.0" style="-fx-background-color: light grey;">
+            <Pane prefHeight="647.0" prefWidth="1270.0" style="-fx-background-color: white;">
                <children>
                   <Pane layoutX="147.0" prefHeight="51.0" prefWidth="1123.0" style="-fx-background-color: #001F54;">
                      <children>
@@ -31,7 +32,7 @@
                         </Label>
                         <HBox layoutX="742.0" layoutY="13.0" prefHeight="26.0" prefWidth="367.0">
                            <children>
-                              <Label fx:id="barangayLocation" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="389.0" text="Welcome!" textFill="WHITE" HBox.hgrow="ALWAYS">
+                              <Label fx:id="barangayLocation" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="389.0" text="Barangay" textFill="WHITE" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Arial Bold" size="23.0" />
                                  </font>
@@ -43,7 +44,7 @@
                   <Pane layoutY="-90.0" prefHeight="730.0" prefWidth="147.0" style="-fx-background-color: #81D4FA;">
                      <children>
                         <Circle fill="WHITE" layoutX="74.0" layoutY="158.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-                        <ImageView fitHeight="57.0" fitWidth="54.0" layoutX="46.0" layoutY="130.0">
+                        <ImageView fitHeight="57.0" fitWidth="54.0" layoutX="47.0" layoutY="130.0">
                            <image>
                               <Image url="@../../../Images%20for%20agapay/erasebg-transformed.png" />
                            </image>
@@ -108,12 +109,11 @@
                         <Image url="@../../../Images%20for%20agapay/left-arrow.png" />
                      </image>
                   </ImageView>
-                  <ComboBox layoutX="335.0" layoutY="101.0" prefHeight="32.0" prefWidth="150.0" promptText="Valid ID Type" />
-                  <TableView fx:id="citizenTable" layoutX="163.0" layoutY="258.0" prefHeight="369.0" prefWidth="1095.0">
+                  <TableView fx:id="citizenTable" layoutX="163.0" layoutY="268.0" prefHeight="359.0" prefWidth="1095.0">
                     <columns>
                       <TableColumn fx:id="citizenIDColumn" text="Citizen_ID" />
-                        <TableColumn fx:id="citizenLastNameColumn" prefWidth="110.0" text="Last_Name" />
                       <TableColumn fx:id="citizenFirstNameColumn" prefWidth="110.0" text="First_Name" />
+                        <TableColumn fx:id="citizenLastNameColumn" prefWidth="110.0" text="Last_Name" />
                         <TableColumn fx:id="contactColumn" prefWidth="120.0" text="Contact_Num" />
                         <TableColumn fx:id="maritalStatusColumn" prefWidth="110.0" text="Marital_Status" />
                         <TableColumn fx:id="householdColumn" prefWidth="95.0" text="Household_No" />
@@ -127,6 +127,87 @@
                         <TableColumn fx:id="countryColumn" prefWidth="110.0" text="Country_Name" />
                     </columns>
                   </TableView>
+                  <HBox layoutX="295.0" layoutY="70.0" prefHeight="145.0" prefWidth="962.0">
+                     <children>
+                        <Pane prefHeight="171.0" prefWidth="979.0" style="-fx-background-color: #B0D9F7;">
+                           <children>
+                              <ComboBox fx:id="validIDTypeComboBox" layoutX="253.0" layoutY="58.0" prefHeight="28.0" prefWidth="219.0" promptText="Valid ID Type" style="-fx-background-color: #FFFFFF; -fx-border-color: #F2F2F2; -fx-border-radius: 3; -fx-background-radius: 3;" />
+                              <TextField fx:id="citizenFistNameField" layoutX="14.0" layoutY="15.0" prefHeight="17.0" prefWidth="219.0" promptText="First Name" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 3; -fx-border-radius: 3;">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="citizenLastNameField" layoutX="253.0" layoutY="15.0" prefHeight="28.0" prefWidth="219.0" promptText="Last Name" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 3; -fx-border-radius: 3;">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="contactNoField" layoutX="492.0" layoutY="15.0" prefHeight="28.0" prefWidth="219.0" promptText="Contact Number" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 3; -fx-border-radius: 3;">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                              </TextField>
+                              <ComboBox fx:id="maritalStatusComboBox" layoutX="730.0" layoutY="15.0" prefHeight="28.0" prefWidth="219.0" promptText="Marital Status" style="-fx-background-color: #FFFFFF; -fx-border-color: #F2F2F2; -fx-border-radius: 3; -fx-background-radius: 3;" />
+                              <TextField fx:id="householdNumberField" layoutX="14.0" layoutY="58.0" prefHeight="28.0" prefWidth="219.0" promptText="Household Number" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 3; -fx-border-radius: 3;">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="validIDCodeField" layoutX="492.0" layoutY="58.0" prefHeight="28.0" prefWidth="219.0" promptText="Valid ID Code" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 3; -fx-border-radius: 3;">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="houseNumberField" layoutX="730.0" layoutY="58.0" prefHeight="28.0" prefWidth="219.0" promptText="House Number" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 3; -fx-border-radius: 3;">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="autoBarangayField" layoutX="14.0" layoutY="101.0" prefHeight="28.0" prefWidth="179.0" promptText="Barangay" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 3; -fx-border-radius: 3;">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="autoCityField" layoutX="202.0" layoutY="101.0" prefHeight="28.0" prefWidth="179.0" promptText="City" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 3; -fx-border-radius: 3;">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="autoZipField" layoutX="392.0" layoutY="101.0" prefHeight="28.0" prefWidth="179.0" promptText="ZIP" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 3; -fx-border-radius: 3;">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="autoRegionField" layoutX="581.0" layoutY="101.0" prefHeight="28.0" prefWidth="179.0" promptText="Region " style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 3; -fx-border-radius: 3;">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                              </TextField>
+                              <TextField fx:id="autoCountryField" layoutX="769.0" layoutY="101.0" prefHeight="28.0" prefWidth="179.0" promptText="Country" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 3; -fx-border-radius: 3;">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <Button fx:id="confirmRegisterButton" layoutX="1044.0" layoutY="223.0" mnemonicParsing="false" onAction="#confirmRegisterButtonHandler" prefHeight="34.0" prefWidth="212.0" style="-fx-background-color: #27AE60;" text="CONFIRM REGISTER" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="deleteCitizenButton" layoutX="878.0" layoutY="223.0" mnemonicParsing="false" onAction="#deleteCitizenButtonHandler" prefHeight="34.0" prefWidth="156.0" style="-fx-background-color: #C0392B;" text="DELETE" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="Segoe UI Bold" size="14.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
          </children>

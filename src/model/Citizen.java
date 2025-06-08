@@ -1,5 +1,6 @@
 package model;
 import javafx.beans.property.SimpleStringProperty;
+
 public class Citizen {
     private SimpleStringProperty citizen_id;
     private SimpleStringProperty citizenlastname;

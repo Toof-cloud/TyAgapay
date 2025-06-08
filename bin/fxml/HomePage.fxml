@@ -19,7 +19,7 @@
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane prefHeight="643.0" prefWidth="1270.0">
+            <Pane prefHeight="643.0" prefWidth="1270.0" style="-fx-background-color: white;">
                <children>
                   <Text layoutX="93.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Agapay">
                      <font>
