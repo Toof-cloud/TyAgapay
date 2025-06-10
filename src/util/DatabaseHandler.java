@@ -17,23 +17,29 @@ public class DatabaseHandler {
         return handler;
     }
 
-    public static Connection getDBConnection()
-    {
-        Connection connection = null;
-        String dburl = "jdbc:mysql://localhost:3306/agapaydb?serverTimezone=UTC";
-        String userName = "root";
-        String password = "password";
+    public static Connection getDBConnection() {
+    Connection connection = null;
+    // Add serverTimezone parameter to the URL
+    String dburl = "jdbc:mysql://localhost:3306/AgapayDBclone?serverTimezone=Asia/Singapore";
+    String userName = "root";
+    String password = "password";
 
-        try {
-            connection = DriverManager.getConnection(dburl, userName, password);
-            System.out.println("Database connected successfully.");
-        } catch (Exception e){
-            System.err.println("Connection failed: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-        return connection;
+    try {
+        // Load the JDBC driver
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        
+        connection = DriverManager.getConnection(dburl, userName, password);
+        System.out.println("Database connected successfully.");
+    } catch (ClassNotFoundException e) {
+        System.err.println("MySQL JDBC Driver not found: " + e.getMessage());
+        e.printStackTrace();
+    } catch (SQLException e) {
+        System.err.println("Connection failed: " + e.getMessage());
+        e.printStackTrace();
     }
+
+    return connection;
+}
 
     public ResultSet execQuery(String query) {
         ResultSet result;
