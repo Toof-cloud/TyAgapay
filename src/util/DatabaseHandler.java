@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import model.Admin;
 import model.Citizen;
+import model.Inventory;
 
 public class DatabaseHandler {
     private static DatabaseHandler handler = null;
@@ -241,6 +242,227 @@ public class DatabaseHandler {
     try {
         Connection conn = getDBConnection();
         PreparedStatement stmt = conn.prepareStatement(query);
+        result = stmt.executeQuery();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return result;
+    }
+
+    // inventory
+    public static ResultSet getInventory() {
+        getInstance();
+        ResultSet result = null;
+        try {
+            String query = "SELECT " +
+                    "i.inventory_id, " +
+                    "i.distributor, " +
+                    "CONCAT(a.adminfirstname, ' ', a.adminlastname) AS received_by, " +
+                    "b.name AS barangay, " +
+                    "ri.item_name, " +
+                    "ii.quantity, " +
+                    "i.inventory_date " +
+                    "FROM inventory i " +
+                    "JOIN admin_officials a ON i.received_by = a.admin_id " +
+                    "JOIN barangays b ON i.barangay_id = b.barangay_id " +
+                    "JOIN inventory_item ii ON i.inventory_id = ii.inventory_id " +
+                    "JOIN relief_item ri ON ii.item_id = ri.item_id";
+            Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query);
+            result = stmt.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static ResultSet getInventoryItemsForBarangay(String barangayName) {
+    ResultSet result = null;
+    try {
+        String query = "SELECT ri.item_name, ii.quantity " +
+                       "FROM inventory i " +
+                       "JOIN inventory_item ii ON i.inventory_id = ii.inventory_id " +
+                       "JOIN relief_item ri ON ii.item_id = ri.item_id " +
+                       "JOIN barangays b ON i.barangay_id = b.barangay_id " +
+                       "WHERE b.name = ?";
+        Connection conn = getDBConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1, barangayName);
+        result = stmt.executeQuery();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return result;
+}
+    public static ResultSet getInventoryForBarangay(String barangayName) {
+    ResultSet result = null;
+    try {
+        String query = "SELECT " +
+                "i.inventory_id, " +
+                "i.distributor, " +
+                "CONCAT(a.adminfirstname, ' ', a.adminlastname) AS received_by, " +
+                "b.name AS barangay, " +
+                "ri.item_name, " +
+                "ii.quantity, " +
+                "i.inventory_date " +
+                "FROM inventory i " +
+                "JOIN admin_officials a ON i.received_by = a.admin_id " +
+                "JOIN barangays b ON i.barangay_id = b.barangay_id " +
+                "JOIN inventory_item ii ON i.inventory_id = ii.inventory_id " +
+                "JOIN relief_item ri ON ii.item_id = ri.item_id " +
+                "WHERE b.name = ?";
+        Connection conn = getDBConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1, barangayName);
+        result = stmt.executeQuery();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return result;
+}
+
+    public static ResultSet getBarangayOfficials(String barangayName) {
+    ResultSet result = null;
+    try {
+        String sql = "SELECT admin_id, adminfirstname, adminlastname FROM admin_officials ao " +
+                     "JOIN barangays b ON ao.barangay_id = b.barangay_id WHERE b.name = ?";
+        Connection conn = getDBConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, barangayName);
+        result = stmt.executeQuery();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return result;
+}
+    /**
+     * Adds a new inventory transaction, its items, and updates item_stock.
+     * @param inventory The Inventory object (must have distributor, receivedBy, barangayId, inventoryDate)
+     * @param itemQuantities Map of item_id to quantity for this transaction
+     * @return true if successful, false otherwise
+     */
+    public static boolean addInventory(Inventory inventory, Map<Integer, Integer> itemQuantities) {
+    Connection conn = null;
+    PreparedStatement invStmt = null;
+    PreparedStatement itemStmt = null;
+    PreparedStatement stockStmt = null;
+    ResultSet generatedKeys = null;
+    boolean success = false;
+
+    try {
+        conn = getDBConnection();
+        conn.setAutoCommit(false);
+
+        // 1. Insert into inventory
+        String invSql = "INSERT INTO inventory (distributor, received_by, barangay_id, inventory_date) VALUES (?, ?, ?, ?)";
+        invStmt = conn.prepareStatement(invSql, Statement.RETURN_GENERATED_KEYS);
+        invStmt.setString(1, inventory.getDistributor());
+        invStmt.setInt(2, inventory.getReceivedById()); // Make sure your Inventory class has getReceivedBy()
+        invStmt.setInt(3, inventory.getBarangayId());
+        invStmt.setString(4, inventory.getInventoryDate());
+        invStmt.executeUpdate();
+
+        generatedKeys = invStmt.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            int inventoryId = generatedKeys.getInt(1);
+
+            // 2. Insert inventory items and update stock
+            String itemSql = "INSERT INTO inventory_item (inventory_id, item_id, quantity) VALUES (?, ?, ?)";
+            itemStmt = conn.prepareStatement(itemSql);
+
+            String stockSql = "INSERT INTO item_stock (barangay_id, item_id, quantity) VALUES (?, ?, ?) " +
+                              "ON DUPLICATE KEY UPDATE quantity = quantity + VALUES(quantity)";
+            stockStmt = conn.prepareStatement(stockSql);
+
+            for (Map.Entry<Integer, Integer> entry : itemQuantities.entrySet()) {
+                int itemId = entry.getKey();
+                int quantity = entry.getValue();
+
+                // Insert inventory_item
+                itemStmt.setInt(1, inventoryId);
+                itemStmt.setInt(2, itemId);
+                itemStmt.setInt(3, quantity);
+                itemStmt.addBatch();
+
+                // Update item_stock
+                stockStmt.setInt(1, inventory.getBarangayId());
+                stockStmt.setInt(2, itemId);
+                stockStmt.setInt(3, quantity);
+                stockStmt.addBatch();
+            }
+            itemStmt.executeBatch();
+            stockStmt.executeBatch();
+            conn.commit();
+            success = true;
+        } else {
+            conn.rollback();
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        try { if (conn != null) conn.rollback(); } catch (Exception ex) { ex.printStackTrace(); }
+    } finally {
+        try { if (generatedKeys != null) generatedKeys.close(); } catch (Exception e) {}
+        try { if (invStmt != null) invStmt.close(); } catch (Exception e) {}
+        try { if (itemStmt != null) itemStmt.close(); } catch (Exception e) {}
+        try { if (stockStmt != null) stockStmt.close(); } catch (Exception e) {}
+        try { if (conn != null) conn.setAutoCommit(true); conn.close(); } catch (Exception e) {}
+    }
+    return success;
+}
+    public static int getAdminIdByName(String fullName) {
+    int id = -1;
+    try {
+        String[] parts = fullName.trim().split(" ", 2); // Split into 2 parts only
+        if (parts.length < 2) return -1;
+        String sql = "SELECT admin_id FROM admin_officials WHERE adminfirstname = ? AND adminlastname = ?";
+        Connection conn = getDBConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, parts[0]);
+        stmt.setString(2, parts[1]);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) id = rs.getInt("admin_id");
+        rs.close(); stmt.close(); conn.close();
+    } catch (Exception e) { e.printStackTrace(); }
+    return id;
+}
+
+    public static int getBarangayIdByName(String barangayName) {
+        int id = -1;
+        try {
+            String sql = "SELECT barangay_id FROM barangays WHERE name = ?";
+            Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, barangayName);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) id = rs.getInt("barangay_id");
+            rs.close(); stmt.close(); conn.close();
+        } catch (Exception e) { e.printStackTrace(); }
+        return id;
+}
+
+    public static int getItemIdByName(String itemName) {
+        int id = -1;
+        try {
+            String sql = "SELECT item_id FROM relief_item WHERE item_name = ?";
+            Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, itemName);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) id = rs.getInt("item_id");
+            rs.close(); stmt.close(); conn.close();
+        } catch (Exception e) { e.printStackTrace(); }
+        return id;
+    }
+    public static ResultSet getItemStockForBarangay(String barangayName) {
+    ResultSet result = null;
+    try {
+        String query = "SELECT ri.item_name, s.quantity " +
+                       "FROM item_stock s " +
+                       "JOIN barangays b ON s.barangay_id = b.barangay_id " +
+                       "JOIN relief_item ri ON s.item_id = ri.item_id " +
+                       "WHERE b.name = ?";
+        Connection conn = getDBConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1, barangayName);
         result = stmt.executeQuery();
     } catch (Exception e) {
         e.printStackTrace();

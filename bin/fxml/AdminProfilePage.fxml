@@ -114,7 +114,7 @@
                   </Button>
                   <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="31.0" layoutY="33.0">
                      <image>
-                        <Image url="@../../../Images%20for%20agapay/left-arrow.png" />
+                        <Image url="@../images/left-arrow.png" />
                      </image>
                   </ImageView>
                </children>

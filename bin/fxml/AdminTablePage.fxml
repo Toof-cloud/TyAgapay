@@ -38,7 +38,7 @@
                         <Circle fill="WHITE" layoutX="60.0" layoutY="157.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
                         <ImageView fitHeight="57.0" fitWidth="54.0" layoutX="33.0" layoutY="128.0">
                            <image>
-                              <Image url="@../../../Images%20for%20agapay/erasebg-transformed.png" />
+                              <Image url="@../images/agapaylogo.png" />
                            </image>
                         </ImageView>
                         <Label layoutX="20.0" layoutY="211.0" text="AGAPAY">
@@ -77,14 +77,14 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="144.0" layoutY="77.0">
+                  <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="146.0" layoutY="78.0">
                      <image>
-                        <Image url="@../../../Images%20for%20agapay/left-arrow.png" />
+                        <Image url="@../images/left-arrow.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="1155.0" layoutY="77.0">
                      <image>
-                        <Image url="@../../../Images%20for%20agapay/trash.png" />
+                        <Image url="@../images/trash.png" />
                      </image>
                   </ImageView>
                </children>

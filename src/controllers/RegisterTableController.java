@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -25,7 +26,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import model.Admin;
 import model.Citizen;
 import util.DatabaseHandler;
 
@@ -171,6 +171,19 @@ public class RegisterTableController implements Initializable {
         householdColumn.setCellValueFactory(new PropertyValueFactory<>("householdNo"));
         validIDTypeColumn.setCellValueFactory(new PropertyValueFactory<>("validIdType"));
         validIDCodeColumn.setCellValueFactory(new PropertyValueFactory<>("validIdCode"));
+        validIDCodeColumn.setCellFactory(column -> {
+        return new TableCell<Citizen, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText("#".repeat(item.length())); 
+                }
+            }
+        };
+    });
         houseColumn.setCellValueFactory(new PropertyValueFactory<>("houseNo"));
         barangayColumn.setCellValueFactory(new PropertyValueFactory<>("barangayName"));
         cityColumn.setCellValueFactory(new PropertyValueFactory<>("cityName"));
