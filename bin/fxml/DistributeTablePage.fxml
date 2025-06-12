@@ -31,9 +31,9 @@
                   <Pane layoutY="-90.0" prefHeight="730.0" prefWidth="147.0" style="-fx-background-color: #81D4FA;">
                      <children>
                         <Circle fill="WHITE" layoutX="74.0" layoutY="158.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-                        <ImageView fitHeight="57.0" fitWidth="54.0" layoutX="46.0" layoutY="130.0">
+                        <ImageView fitHeight="57.0" fitWidth="54.0" layoutX="47.0" layoutY="130.0">
                            <image>
-                              <Image url="@../../../Images%20for%20agapay/erasebg-transformed.png" />
+                              <Image url="@../images/agapaylogo.png" />
                            </image>
                         </ImageView>
                         <Label layoutX="23.0" layoutY="214.0" text="AGAPAY">
@@ -93,7 +93,7 @@
                   </Button>
                   <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="173.0" layoutY="79.0">
                      <image>
-                        <Image url="@../../../Images%20for%20agapay/left-arrow.png" />
+                        <Image url="@../images/left-arrow.png" />
                      </image>
                   </ImageView>
                   <TextField fx:id="searchTextField" layoutX="945.0" layoutY="69.0" prefHeight="24.0" prefWidth="303.0" promptText="Search" style="-fx-border-color: light grey; -fx-background-radius: 5; -fx-border-radius: 5;">

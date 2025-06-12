@@ -2,11 +2,16 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -31,9 +36,9 @@
                   <Pane layoutY="-90.0" prefHeight="730.0" prefWidth="147.0" style="-fx-background-color: #81D4FA;">
                      <children>
                         <Circle fill="WHITE" layoutX="74.0" layoutY="158.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-                        <ImageView fitHeight="57.0" fitWidth="54.0" layoutX="46.0" layoutY="130.0">
+                        <ImageView fitHeight="57.0" fitWidth="54.0" layoutX="47.0" layoutY="130.0">
                            <image>
-                              <Image url="@../../../Images%20for%20agapay/erasebg-transformed.png" />
+                              <Image url="@../images/agapaylogo.png" />
                            </image>
                         </ImageView>
                         <Label layoutX="23.0" layoutY="214.0" text="AGAPAY">
@@ -93,14 +98,310 @@
                   </Button>
                   <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="173.0" layoutY="79.0">
                      <image>
-                        <Image url="@../../../Images%20for%20agapay/left-arrow.png" />
+                        <Image url="@../images/left-arrow.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="searchTextField" layoutX="945.0" layoutY="69.0" prefHeight="24.0" prefWidth="303.0" promptText="Search" style="-fx-border-color: light grey; -fx-background-radius: 5; -fx-border-radius: 5;">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
+                  <Pane layoutX="277.0" layoutY="70.0" prefHeight="192.0" prefWidth="979.0" style="-fx-background-color: #B0D9F7;">
+                     <children>
+                        <ComboBox fx:id="fromComboBox" layoutX="14.0" layoutY="15.0" prefHeight="28.0" prefWidth="308.0" promptText="FROM" style="-fx-background-color: #FFFFFF; -fx-border-color: #F2F2F2; -fx-border-radius: 3; -fx-background-radius: 3;" />
+                        <Label layoutX="21.0" layoutY="70.0" text="Rice:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="newRiceField" layoutX="147.0" layoutY="67.0" prefHeight="28.0" prefWidth="54.0" promptText="kg" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 0; -fx-border-radius: 0;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                        <Label layoutX="21.0" layoutY="113.0" text="Canned Sardines:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="newCannedSardinesField" layoutX="147.0" layoutY="110.0" prefHeight="28.0" prefWidth="54.0" promptText="pcs" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 0; -fx-border-radius: 0;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                        <Label layoutX="21.0" layoutY="153.0" text="Canned Beef:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="newCannedBeef" layoutX="147.0" layoutY="150.0" prefHeight="28.0" prefWidth="54.0" promptText="pcs" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 0; -fx-border-radius: 0;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                        <Label layoutX="231.0" layoutY="70.0" text="Canned Tuna:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="newCannnedTunaField" layoutX="334.0" layoutY="67.0" prefHeight="28.0" prefWidth="54.0" promptText="pcs" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 0; -fx-border-radius: 0;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                        <Label layoutX="231.0" layoutY="113.0" text="Noodles:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="newNoodlesField" layoutX="334.0" layoutY="110.0" prefHeight="28.0" prefWidth="54.0" promptText="pcs" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 0; -fx-border-radius: 0;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                        <Label layoutX="232.0" layoutY="153.0" text="Biscuits:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="newBiscuitsField" layoutX="334.0" layoutY="150.0" prefHeight="28.0" prefWidth="54.0" promptText="pcs" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 0; -fx-border-radius: 0;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                        <Label layoutX="420.0" layoutY="70.0" text="Bottled Water:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="newBottledWaterField" layoutX="527.0" layoutY="67.0" prefHeight="28.0" prefWidth="54.0" promptText="pcs" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 0; -fx-border-radius: 0;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                        <Label layoutX="420.0" layoutY="113.0" text="Bar Soap:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="newBarSoapField" layoutX="527.0" layoutY="110.0" prefHeight="28.0" prefWidth="54.0" promptText="pcs" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 0; -fx-border-radius: 0;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                        <Label layoutX="420.0" layoutY="153.0" text="Toothpaste:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="newToothPasteField" layoutX="527.0" layoutY="150.0" prefHeight="28.0" prefWidth="54.0" promptText="pcs" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 0; -fx-border-radius: 0;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                        <Button fx:id="addInventoryButton" layoutX="803.0" layoutY="148.0" mnemonicParsing="false" onAction="#addInventoryButtonHandler" prefHeight="34.0" prefWidth="167.0" style="-fx-background-color: #27AE60; -fx-background-radius: 0;" text="ADD TO INVENTORY" textFill="WHITE">
+                           <font>
+                              <Font name="Segoe UI Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Label layoutX="613.0" layoutY="70.0" text="Shampoo:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="newShampooField" layoutX="726.0" layoutY="67.0" prefHeight="28.0" prefWidth="54.0" promptText="pcs" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 0; -fx-border-radius: 0;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                        <Label layoutX="613.0" layoutY="113.0" text="Napkin:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="newNapkinField" layoutX="727.0" layoutY="110.0" prefHeight="28.0" prefWidth="54.0" promptText="pcs" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 0; -fx-border-radius: 0;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                        <Label layoutX="613.0" layoutY="153.0" text="Powdered Milk:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="newPowderedMilkField" layoutX="727.0" layoutY="150.0" prefHeight="28.0" prefWidth="54.0" promptText="pcs" style="-fx-background-color: white; -fx-border-color: #F2F2F2; -fx-background-radius: 0; -fx-border-radius: 0;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                        <ComboBox fx:id="selectReceiverComboBox" layoutX="336.0" layoutY="15.0" prefHeight="28.0" prefWidth="308.0" promptText="SELECT RECEIVER" style="-fx-background-color: #FFFFFF; -fx-border-color: #F2F2F2; -fx-border-radius: 3; -fx-background-radius: 3;" />
+                        <HBox layoutX="798.0" layoutY="70.0" prefHeight="17.0" prefWidth="167.0" />
+                        <Label fx:id="displayDateLabel" layoutX="664.0" layoutY="15.0" prefHeight="28.0" prefWidth="308.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <ScrollPane layoutX="163.0" layoutY="276.0" prefHeight="358.0" prefWidth="1093.0" style="-fx-border-color: white; -fx-background-color: white;">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="441.0" prefWidth="1071.0" style="-fx-background-color: white; -fx-border-color: white;">
+                           <children>
+                              <Label layoutX="14.0" layoutY="20.0" text="Transaction Inventory">
+                                 <font>
+                                    <Font name="Segoe UI Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <TableView fx:id="inventoryTable" layoutX="14.0" layoutY="55.0" prefHeight="200.0" prefWidth="1056.0">
+                                <columns>
+                                  <TableColumn fx:id="inventoyIDColumn" prefWidth="124.00001525878906" text="Inventory_ID" />
+                                    <TableColumn fx:id="distributorColumn" prefWidth="188.0" text="Distributor" />
+                                    <TableColumn fx:id="receivedByColumn" prefWidth="188.0" text="Received By" />
+                                    <TableColumn fx:id="barangayColumn" prefWidth="188.0" text="Barangay " />
+                                    <TableColumn fx:id="inventoryListColumn" prefWidth="188.0" text="Inventory List" />
+                                    <TableColumn fx:id="quantityColumn" prefWidth="100.0" text="Quantity" />
+                                    <TableColumn fx:id="dateColumn" prefWidth="262.0" text="Date" />
+                                </columns>
+                              </TableView>
+                              <Label layoutX="14.0" layoutY="271.0" text="Relief Goods Stock:">
+                                 <font>
+                                    <Font name="Segoe UI Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="16.0" layoutY="316.0" text="Rice">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="riceDisplayField" alignment="CENTER" layoutX="57.0" layoutY="313.0" prefHeight="28.0" prefWidth="91.0" style="-fx-background-color: white; -fx-border-color: #F2F2F2;" />
+                              <Label layoutX="159.0" layoutY="316.0" text="kg">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="16.0" layoutY="356.0" text="Sardines">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="sardinesDisplayField" alignment="CENTER" layoutX="90.0" layoutY="353.0" prefHeight="28.0" prefWidth="91.0" style="-fx-background-color: white; -fx-border-color: #F2F2F2;" />
+                              <Label layoutX="192.0" layoutY="356.0" text="pcs">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="16.0" layoutY="396.0" text="Corned Beef">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="cornedBeefDisplayField" alignment="CENTER" layoutX="119.0" layoutY="393.0" prefHeight="28.0" prefWidth="91.0" style="-fx-background-color: white; -fx-border-color: #F2F2F2;" />
+                              <Label layoutX="285.0" layoutY="316.0" text="Tuna">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="222.0" layoutY="396.0" text="pcs">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tunaDisplayField" alignment="CENTER" layoutX="331.0" layoutY="313.0" prefHeight="28.0" prefWidth="91.0" style="-fx-background-color: white; -fx-border-color: #F2F2F2;" />
+                              <Label layoutX="433.0" layoutY="316.0" text="pcs">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="286.0" layoutY="356.0" text="Noodles">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="noodlesDisplayField" alignment="CENTER" layoutX="360.0" layoutY="353.0" prefHeight="28.0" prefWidth="91.0" style="-fx-background-color: white; -fx-border-color: #F2F2F2;" />
+                              <Label layoutX="463.0" layoutY="356.0" text="pcs">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="286.0" layoutY="395.0" text="Biscuits">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="biscuitsDisplayField" alignment="CENTER" layoutX="355.0" layoutY="392.0" prefHeight="28.0" prefWidth="91.0" style="-fx-background-color: white; -fx-border-color: #F2F2F2;" />
+                              <Label layoutX="457.0" layoutY="396.0" text="pcs">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="526.0" layoutY="316.0" text="Bottled Water">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="bottledWaterDisplayField" alignment="CENTER" layoutX="640.0" layoutY="313.0" prefHeight="28.0" prefWidth="91.0" style="-fx-background-color: white; -fx-border-color: #F2F2F2;" />
+                              <Label layoutX="742.0" layoutY="316.0" text="pcs">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="526.0" layoutY="356.0" text="Bar Soap">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="barSoapDisplayField" alignment="CENTER" layoutX="604.0" layoutY="353.0" prefHeight="28.0" prefWidth="91.0" style="-fx-background-color: white; -fx-border-color: #F2F2F2;" />
+                              <Label layoutX="708.0" layoutY="356.0" text="pcs">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="527.0" layoutY="396.0" text="Toothpaste">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="toothpasteDisplayField" alignment="CENTER" layoutX="623.0" layoutY="392.0" prefHeight="28.0" prefWidth="91.0" style="-fx-background-color: white; -fx-border-color: #F2F2F2;" />
+                              <Label layoutX="727.0" layoutY="396.0" text="pcs">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="805.0" layoutY="316.0" text="Shampoo">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="shampooDisplayField" alignment="CENTER" layoutX="884.0" layoutY="313.0" prefHeight="28.0" prefWidth="91.0" style="-fx-background-color: white; -fx-border-color: #F2F2F2;" />
+                              <Label layoutX="986.0" layoutY="316.0" text="pcs">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="806.0" layoutY="356.0" text="Napkin">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="napkinDisplayField" alignment="CENTER" layoutX="871.0" layoutY="353.0" prefHeight="28.0" prefWidth="91.0" style="-fx-background-color: white; -fx-border-color: #F2F2F2;" />
+                              <Label layoutX="974.0" layoutY="356.0" text="pcs">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="807.0" layoutY="395.0" text="Powdered Milk">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="powderedMilkDisplayField" alignment="CENTER" layoutX="932.0" layoutY="392.0" prefHeight="28.0" prefWidth="91.0" style="-fx-background-color: white; -fx-border-color: #F2F2F2;" />
+                              <Label layoutX="1034.0" layoutY="395.0" text="pcs">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
                </children>
             </Pane>
          </children>

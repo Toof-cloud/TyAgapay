@@ -29,7 +29,7 @@
                   <Circle fill="WHITE" layoutX="60.0" layoutY="34.0" radius="24.0" stroke="#aaaaaa" strokeType="INSIDE" />
                   <ImageView fitHeight="38.0" fitWidth="35.0" layoutX="43.0" layoutY="15.0">
                      <image>
-                        <Image url="@../../../Images%20for%20agapay/erasebg-transformed.png" />
+                        <Image url="@../images/agapaylogo.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="profileLogoutButton" layoutX="1190.0" layoutY="12.0" mnemonicParsing="false" onAction="#checkProfileLogoutHandler" prefHeight="48.0" prefWidth="50.0" style="-fx-background-color: white; -fx-background-radius: 200; -fx-border-radius: 200; -fx-border-color: black;">
@@ -39,7 +39,7 @@
                   </Button>
                   <ImageView fitHeight="576.0" fitWidth="1270.0" layoutY="68.0">
                      <image>
-                        <Image url="@../../../Images%20for%20agapay/xml%20version=1.0%20encoding=UTF-8%20import%20javafx.scene.layout.Pane%20Pane%20layoutY=235.0%20prefHeight=405.0%20prefWidth=1270.0%20xmlns=httpjavafx.comjavafx23.0.1%20xmlnsfx=httpjavafx.comfxml1%20%20(6).png" />
+                        <Image url="@../images/homepage.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="adminButton" alignment="BASELINE_LEFT" layoutX="52.0" layoutY="403.0" mnemonicParsing="false" onAction="#goToAdminCrudHandler" prefHeight="113.0" prefWidth="242.0" style="-fx-background-color: #81D4FA; -fx-background-radius: 0; -fx-border-color: #D3D3D3;" textFill="#363636">
@@ -79,7 +79,7 @@
                   <ImageView fx:id="slideshowImageView" fitHeight="249.0" fitWidth="443.0" layoutX="703.0" layoutY="335.0" pickOnBounds="true" preserveRatio="false" />
                   <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="1193.0" layoutY="14.0" mouseTransparent="true">
                      <image>
-                        <Image url="@../../../Images%20for%20agapay/user%20(4).png" />
+                        <Image url="@../images/adminprofile.png" />
                      </image>
                   </ImageView>
                   <HBox layoutX="815.0" layoutY="23.0" prefHeight="26.0" prefWidth="367.0">
@@ -135,7 +135,7 @@
                      <children>
                         <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="14.0" layoutY="14.0" mouseTransparent="true">
                            <image>
-                              <Image url="@../../../Images%20for%20agapay/distribution.png" />
+                              <Image url="@../images/distribution.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -144,7 +144,7 @@
                      <children>
                         <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="14.0" layoutY="14.0" mouseTransparent="true">
                            <image>
-                              <Image url="@../../../Images%20for%20agapay/inventory%20(1).png" />
+                              <Image url="@../images/inventory.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -154,7 +154,7 @@
                      <children>
                         <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="17.0" layoutY="15.0" mouseTransparent="true">
                            <image>
-                              <Image url="@../../../../../Downloads/edit%20(1).png" />
+                              <Image url="@../images/edit.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -164,7 +164,7 @@
                      <children>
                         <ImageView fitHeight="34.0" fitWidth="35.0" layoutX="14.0" layoutY="14.0" mouseTransparent="true">
                            <image>
-                              <Image url="@../../../Images%20for%20agapay/history.png" />
+                              <Image url="@../images/history.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -174,7 +174,7 @@
                      <children>
                         <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="14.0" layoutY="19.0">
                            <image>
-                              <Image url="@../../../Images%20for%20agapay/user%20(5).png" />
+                              <Image url="@../images/user.png" />
                            </image>
                         </ImageView>
                      </children>
