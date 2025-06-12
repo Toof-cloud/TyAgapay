@@ -1,0 +1,798 @@
+CREATE DATABASE AgapayDBclone;
+DROP DATABASE agapaydb;
+USE agapaydbclone;
+
+-- Create Database and Use It
+CREATE DATABASE agapaydb;
+USE agapaydb;
+
+-- Drop tables if exist to start clean
+DROP TABLE IF EXISTS admin_officials;
+DROP TABLE IF EXISTS barangays;
+DROP TABLE IF EXISTS cities;
+DROP TABLE IF EXISTS regions;
+DROP TABLE IF EXISTS countries;
+
+CREATE TABLE countries (
+    country_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    country_symbol VARCHAR(100)
+);
+
+CREATE TABLE regions (
+    region_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    country_id INT NOT NULL,
+    region_symbol VARCHAR(100),
+    FOREIGN KEY (country_id) REFERENCES countries(country_id)
+);
+
+CREATE TABLE cities (
+    city_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    region_id INT NOT NULL,
+    city_symbol VARCHAR(100),
+    FOREIGN KEY (region_id) REFERENCES regions(region_id)
+);
+
+CREATE TABLE barangays (
+    barangay_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    city_id INT NOT NULL,
+    barangay_symbol VARCHAR(100),
+    zip VARCHAR(10),
+    FOREIGN KEY (city_id) REFERENCES cities(city_id)
+);
+
+-- Insert country
+INSERT INTO countries (name) VALUES ('Philippines');
+UPDATE countries SET country_symbol = CONCAT('country-', LAST_INSERT_ID()) WHERE country_id = LAST_INSERT_ID();
+
+-- Insert region (assuming country_id = 1)
+INSERT INTO regions (name, country_id) VALUES ('NCR', 1);
+UPDATE regions SET region_symbol = CONCAT('region-', LAST_INSERT_ID()) WHERE region_id = LAST_INSERT_ID();
+
+-- Insert city (assuming region_id = 1)
+INSERT INTO cities (name, region_id) VALUES ('Pateros', 1);
+UPDATE cities SET city_symbol = CONCAT('city-', LAST_INSERT_ID()) WHERE city_id = LAST_INSERT_ID();
+
+-- Insert barangay (assuming city_id = 1)
+INSERT INTO barangays (name, city_id) VALUES ('Aguho', 1);
+UPDATE barangays SET barangay_symbol = CONCAT('barangay-', LAST_INSERT_ID()) WHERE barangay_id = LAST_INSERT_ID();
+
+INSERT INTO barangays (name, city_id) VALUES ('Magtanggol', 1);
+UPDATE barangays SET barangay_symbol = CONCAT('barangay-', LAST_INSERT_ID()) WHERE barangay_id = LAST_INSERT_ID();
+
+--------------------------------------------------------
+CREATE TABLE admin_officials (
+  admin_id       INT AUTO_INCREMENT PRIMARY KEY,
+  adminfirstname VARCHAR(50) NOT NULL,
+  adminlastname  VARCHAR(50) NOT NULL,
+  barangay_id    INT NOT NULL,
+  official_type  ENUM(
+                    'Barangay Captain',
+                    'Barangay Kagawad',
+                    'Barangay Secretary',
+                    'Barangay Treasurer',
+                    'SK Chairperson'
+                  ) NOT NULL,
+  adminpassword  VARCHAR(50) NOT NULL,
+  contact        VARCHAR(15) UNIQUE,
+  gmail          VARCHAR(100) UNIQUE,
+  created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (barangay_id) REFERENCES barangays(barangay_id)
+);
+
+SELECT adminfirstname, adminlastname
+FROM admin_officials ao
+JOIN barangays b ON ao.barangay_id = b.barangay_id
+WHERE b.name = 'Magtanggol';
+
+-- Insert Admin Officials for Aguho and Magtanggol using barangay_id
+INSERT INTO admin_officials (adminfirstname, adminlastname, barangay_id, official_type, adminpassword, contact, gmail)
+VALUES 
+-- AGUHO (barangay_id = 1)
+('Ronen Kenneth', 'Pano', 1, 'Barangay Captain', 'pano@2004', '09661234567', 'ronen@gmail.com'),
+('Tyrone Gabriel', 'Pascual', 1, 'Barangay Kagawad', 'pascual@1800', '09458971235', 'tyrone@gmail.com'),
+('Clarisse Marie', 'Dela Cruz', 1, 'Barangay Secretary', 'clarisse@2024', '09234561234', 'clarisse.aguho@gmail.com'),
+('Benedict John', 'Ramos', 1, 'Barangay Treasurer', 'benjohn@2024', '09991239876', 'benedict.ramos@gmail.com'),
+
+-- MAGTANGGOL (barangay_id = 2)
+('Dreig Rashid', 'Aguila', 2, 'Barangay Captain', 'aguila@2004', '09375702698', 'dreig@gmail.com'),
+('Katrina Mae', 'Santos', 2, 'Barangay Kagawad', 'katrina@2024', '09459873221', 'katrina.santos@gmail.com'),
+('Leonard Vincent', 'Javier', 2, 'Barangay Secretary', 'leo@2024', '09187654321', 'leonard.javier@gmail.com'),
+('Mayleen Rose', 'Gonzales', 2, 'Barangay Treasurer', 'mayleen@2024', '09235678901', 'mayleen.g@gmail.com');
+
+
+-- adding 7 barangay kagawads per barangay
+INSERT INTO admin_officials (adminfirstname, adminlastname, barangay_id, official_type, adminpassword, contact, gmail)
+VALUES 
+('Janine', 'Rivera', 1, 'Barangay Kagawad', 'janine@2024', '09178345621', 'janine.rivera@gmail.com'),
+('Miguel', 'Reyes', 1, 'Barangay Kagawad', 'miguel@2024', '09268439012', 'miguel.reyes@gmail.com'),
+('Althea', 'Gomez', 1, 'Barangay Kagawad', 'althea@2024', '09052346789', 'althea.gomez@gmail.com'),
+('Zyren', 'Cruz', 1, 'Barangay Kagawad', 'zyren@2024', '09364238901', 'zyren.cruz@gmail.com'),
+('Patricia', 'Lopez', 1, 'Barangay Kagawad', 'patricia@2024', '09472348190', 'patricia.lopez@gmail.com'),
+('Carl', 'Dela Peña', 1, 'Barangay Kagawad', 'carl@2024', '09563478102', 'carl.delapena@gmail.com'),
+('Elaine', 'Navarro', 1, 'Barangay Kagawad', 'elaine@2024', '09674235891', 'elaine.navarro@gmail.com'),
+
+('Jasper', 'Domingo', 2, 'Barangay Kagawad', 'jasper@2024', '09785462130', 'jasper.domingo@gmail.com'),
+('Riza', 'Torres', 2, 'Barangay Kagawad', 'riza@2024', '09164378592', 'riza.torres@gmail.com'),
+('Marc', 'Padilla', 2, 'Barangay Kagawad', 'marc@2024', '09357483920', 'marc.padilla@gmail.com'),
+('Joan', 'Reyes', 2, 'Barangay Kagawad', 'joan@2024', '09083471926', 'joan.reyes@gmail.com'),
+('Kyle', 'Andrada', 2, 'Barangay Kagawad', 'kyle@2024', '09268741290', 'kyle.andrada@gmail.com'),
+('Gwen', 'Castro', 2, 'Barangay Kagawad', 'gwen@2024', '09583470219', 'gwen.castro@gmail.com'),
+('Nathan', 'Morales', 2, 'Barangay Kagawad', 'nathan@2024', '09471620987', 'nathan.morales@gmail.com');
+
+-- View Inserted Records
+SELECT * FROM admin_officials;
+
+SELECT 
+  ao.admin_id,
+  ao.adminfirstname,
+  ao.adminlastname,
+  b.name AS barangay_name,
+  ao.adminpassword,
+  ao.official_type,
+  ao.contact,
+  ao.gmail,
+  ao.created_at
+FROM 
+  admin_officials ao
+JOIN 
+  barangays b ON ao.barangay_id = b.barangay_id;
+
+
+-- Create admin_log Table for viewing the history of insert, delete and update
+CREATE TABLE admin_log (
+    log_id         INT AUTO_INCREMENT PRIMARY KEY,
+    action_type    VARCHAR(10) NOT NULL,
+    admin_id       INT,
+    adminfirstname VARCHAR(50),
+    adminlastname  VARCHAR(50),
+    barangay_id    INT,
+    official_type  VARCHAR(30),
+    contact        VARCHAR(15),
+    gmail          VARCHAR(100),
+    log_time       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (barangay_id) REFERENCES barangays(barangay_id)
+);
+
+-- Trigger: AFTER INSERT
+DELIMITER $$
+CREATE TRIGGER trg_after_admin_insert
+AFTER INSERT ON admin_officials
+FOR EACH ROW
+BEGIN
+    INSERT INTO admin_log (
+        action_type, admin_id, adminfirstname, adminlastname,
+        barangay_id, official_type, contact, gmail
+    )
+    VALUES (
+        'INSERT', NEW.admin_id, NEW.adminfirstname, NEW.adminlastname,
+        NEW.barangay_id, NEW.official_type, NEW.contact, NEW.gmail
+    );
+END$$
+DELIMITER ;
+
+-- Trigger: AFTER DELETE
+DELIMITER $$
+CREATE TRIGGER trg_after_admin_delete
+AFTER DELETE ON admin_officials
+FOR EACH ROW
+BEGIN
+    INSERT INTO admin_log (
+        action_type, admin_id, adminfirstname, adminlastname,
+        barangay_id, official_type, contact, gmail
+    )
+    VALUES (
+        'DELETE', OLD.admin_id, OLD.adminfirstname, OLD.adminlastname,
+        OLD.barangay_id, OLD.official_type, OLD.contact, OLD.gmail
+    );
+END$$
+DELIMITER ;
+
+-- Trigger: AFTER UPDATE
+DELIMITER $$
+CREATE TRIGGER trg_after_admin_update
+AFTER UPDATE ON admin_officials
+FOR EACH ROW
+BEGIN
+    INSERT INTO admin_log (
+        action_type, admin_id, adminfirstname, adminlastname,
+        barangay_id, official_type, contact, gmail
+    )
+    VALUES (
+        'UPDATE', NEW.admin_id, NEW.adminfirstname, NEW.adminlastname,
+        NEW.barangay_id, NEW.official_type, NEW.contact, NEW.gmail
+    );
+END$$
+DELIMITER ;
+--
+
+DESCRIBE audit_citizens;
+SELECT 
+  al.*, 
+  b.name AS barangay_name 
+FROM 
+  admin_log al
+JOIN 
+  barangays b ON al.barangay_id = b.barangay_id;
+
+-- VALID IDS TABLE
+CREATE TABLE valid_ids (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+  
+-- INSERT EXAMPLE VALID ID TYPES
+INSERT INTO valid_ids (name) VALUES
+('Philippine Passport'),
+('Driver’s License'),
+('SSS ID'),
+('UMID'),
+('Voter’s ID'),
+('PhilHealth ID'),
+('Postal ID'),
+('Senior Citizen ID'),
+('PWD ID');
+
+select * from valid_ids;
+drop table citizens;
+-- CITIZENS TABLE
+CREATE TABLE citizens (
+	citizen_id	INT AUTO_INCREMENT PRIMARY KEY,
+    citizenlastname VARCHAR(100) NOT NULL,
+    citizenfirstname VARCHAR(100) NOT NULL,
+    contactNum VARCHAR(11) NOT NULL UNIQUE,
+    marital_status ENUM('Single', 'Married', 'Widowed', 'Divorced') NOT NULL,
+    
+    household_no INT NOT NULL,
+    valid_id_type VARCHAR(50) NOT NULL,
+    valid_id_code VARCHAR(30) NOT NULL UNIQUE,
+    
+    house_no CHAR(4),
+    barangay_id INT,
+    city_id INT,
+    zip VARCHAR(10),
+    region_id INT,
+    country_id INT,
+    
+    FOREIGN KEY (barangay_id) REFERENCES barangays(barangay_id),
+    FOREIGN KEY (city_id) REFERENCES cities(city_id),
+    FOREIGN KEY (region_id) REFERENCES regions(region_id),
+    FOREIGN KEY (country_id) REFERENCES countries(country_id)
+);
+
+-- TRIGGER TO AUTO-FILL ZIP FROM BARANGAY
+DELIMITER $$
+
+CREATE TRIGGER trg_fill_zip_from_barangay
+BEFORE INSERT ON citizens
+FOR EACH ROW
+BEGIN
+    DECLARE zip_code VARCHAR(10);
+
+    SELECT zip INTO zip_code
+    FROM barangays
+    WHERE barangay_id = NEW.barangay_id;
+
+    SET NEW.zip = zip_code;
+END$$
+
+DELIMITER ;
+
+-- VIEW CITIZENS WITH LOCATION INFO
+SELECT 
+  c.citizen_id,
+  c.citizenlastname,
+  c.citizenfirstname,
+  c.contactNum,
+  c.marital_status,
+  c.household_no,
+  c.valid_id_type,
+  c.valid_id_code,
+  c.house_no,
+  b.name AS barangay_name,
+  ci.name AS city_name,
+  c.zip,
+  r.name AS region_name,
+  co.name AS country_name
+FROM 
+  citizens c
+JOIN 
+  barangays b ON c.barangay_id = b.barangay_id
+JOIN 
+  cities ci ON c.city_id = ci.city_id
+JOIN 
+  regions r ON c.region_id = r.region_id
+JOIN 
+  countries co ON c.country_id = co.country_id;
+ 
+INSERT INTO citizens (
+    citizenlastname, citizenfirstname, contactNum, marital_status,
+    household_no, valid_id_type, valid_id_code,
+    house_no, barangay_id, city_id, region_id, country_id
+) VALUES
+-- 🏡 AGUHO (barangay_id = 1)
+('Dela Cruz', 'Juan', '09475709236','Married', 5, 'Philippine Passport', 'P1281567A', '963', 1, 1, 1, 1),
+('Reyes', 'Ana', '09335721234','Single', 3, 'Driver’s License', 'N01-23-456789', '2310', 1, 1, 1, 1),
+('Santos', 'Mark', '09871234325','Widowed', 2, 'SSS ID', '01-2345678-9', '1233', 1, 1, 1, 1),
+('Torres', 'Maria', '09753456547','Married', 6, 'UMID', '01-2431478-9', '9857', 1, 1, 1, 1),
+
+-- 🏡 MAGTANGGOL (barangay_id = 2)
+('Garcia', 'Liza', '09981234356','Single', 1, 'Voter’s ID', 'ABCDE1234567', '1235', 2, 1, 1, 1),
+('Fernandez', 'Leo', '09957900057','Married', 4, 'PhilHealth ID', '12-345698101-2', '948', 2, 1, 1, 1),
+('Rodriguez', 'Ella', '09687546759','Divorced', 2, 'Senior Citizen ID', '123456-7890-0000', '5566', 2, 1, 1, 1),
+('Lopez', 'Daniel', '09857568182','Single', 3, 'PWD ID', 'PWD-AU-123456', '6123', 2, 1, 1, 1);
+
+-- trigger for citizens
+CREATE TABLE audit_citizens (
+    audit_id INT AUTO_INCREMENT PRIMARY KEY,
+    citizen_id INT,
+    action_type ENUM('INSERT', 'DELETE') NOT NULL,
+    action_timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    citizenlastname VARCHAR(100),
+    citizenfirstname VARCHAR(100),
+    contactNum VARCHAR(11),
+    valid_id_type VARCHAR(50),
+    valid_id_code VARCHAR(30)
+);
+
+-- trigger for insert
+DELIMITER $$
+
+CREATE TRIGGER trg_log_insert_citizen
+AFTER INSERT ON citizens
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_citizens (
+    citizen_id, action_type,
+    citizenlastname, citizenfirstname, contactNum,
+    valid_id_type, valid_id_code, barangay_id
+  )
+  VALUES (
+    NEW.citizen_id, 'INSERT',
+    NEW.citizenlastname, NEW.citizenfirstname, NEW.contactNum,
+    NEW.valid_id_type, NEW.valid_id_code, NEW.barangay_id
+  );
+END$$
+
+DELIMITER ;
+
+-- trigger for delete
+DELIMITER $$
+
+CREATE TRIGGER trg_log_delete_citizen
+BEFORE DELETE ON citizens
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_citizens (
+    citizen_id, action_type,
+    citizenlastname, citizenfirstname, contactNum,
+    valid_id_type, valid_id_code, barangay_id
+  )
+  VALUES (
+    OLD.citizen_id, 'DELETE',
+    OLD.citizenlastname, OLD.citizenfirstname, OLD.contactNum,
+    OLD.valid_id_type, OLD.valid_id_code, OLD.barangay_id
+  );
+END$$
+
+DELIMITER ;
+
+SELECT 
+  ac.*, 
+  b.name AS barangay_name
+FROM 
+  audit_citizens ac
+JOIN 
+  citizens c ON ac.citizen_id = c.citizen_id
+JOIN 
+  barangays b ON c.barangay_id = b.barangay_id
+ORDER BY 
+  ac.action_timestamp DESC
+LIMIT 0, 1000;
+
+
+-- deleting the table of inventory
+drop table if exists inventory;
+drop table if exists relief_item;
+drop table if exists inventory_item;
+drop table if exists inventory_audit;
+drop table if exists item_stock;
+drop table if exists item_stock_audit;
+
+-- invetory table
+CREATE TABLE inventory (
+	inventory_id INT PRIMARY KEY AUTO_INCREMENT,
+    distributor ENUM ('GO', 'NGO', 'PRIVATE') NOT NULL,
+    received_by INT NOT NULL,
+    barangay_id INT NOT NULL,
+    inventory_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (barangay_id) REFERENCES barangays(barangay_id),
+    FOREIGN KEY (received_by) REFERENCES admin_officials(admin_id)
+);
+
+-- FOR AGUHO
+INSERT INTO inventory (distributor, received_by, barangay_id)
+VALUES ('PRIVATE', 16, 1);
+
+-- FOR MAGTANGGOL
+INSERT INTO inventory (distributor, received_by, barangay_id)
+VALUES ('PRIVATE', 6, 2);
+
+
+-- Fix the incorrect reference
+ALTER TABLE inventory_item 
+DROP FOREIGN KEY inventory_item_ibfk_2;
+
+ALTER TABLE inventory_item
+ADD CONSTRAINT inventory_item_ibfk_2 
+FOREIGN KEY (item_id) REFERENCES relief_items(item_id);
+
+-- Add missing indexes
+ALTER TABLE disaster_relief_quantities 
+ADD INDEX idx_disaster_id (disaster_id),
+ADD INDEX idx_item_id (item_id);
+
+ALTER TABLE item_stock 
+ADD INDEX idx_barangay_item (barangay_id, item_id);
+
+-- items included in each inventory transaction
+CREATE TABLE inventory_item (
+    inventory_item_id INT PRIMARY KEY AUTO_INCREMENT,
+    inventory_id INT,
+    item_id INT,
+    quantity INT,
+    FOREIGN KEY (inventory_id) REFERENCES inventory(inventory_id),
+    FOREIGN KEY (item_id) REFERENCES relief_item(item_id)
+);
+INSERT INTO inventory_item (inventory_id, item_id, quantity)
+VALUES
+-- items for aguho
+  (1, 1, 500),  -- rice
+
+
+-- items for magtanggol
+  (2, 1, 500)  -- rice
+;
+
+SELECT 
+  i.inventory_id,
+  i.distributor,
+  CONCAT(a.adminfirstname, ' ', a.adminlastname) AS received_by,
+  b.name AS barangay,
+  ri.item_name,
+  ii.quantity,
+  i.inventory_date
+FROM inventory i
+JOIN admin_officials a ON i.received_by = a.admin_id
+JOIN barangays b ON i.barangay_id = b.barangay_id
+JOIN inventory_item ii ON i.inventory_id = ii.inventory_id
+JOIN relief_item ri ON ii.item_id = ri.item_id;
+
+-- tracking inventory table
+CREATE TABLE inventory_audit (
+    audit_id INT PRIMARY KEY AUTO_INCREMENT,
+    inventory_id INT,
+    action_type ENUM('INSERT', 'UPDATE', 'DELETE'),
+    distributor ENUM('GO', 'NGO', 'PRIVATE'),
+    received_by INT,
+    barangay_id INT,
+    inventory_date DATETIME,
+    action_timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- insert trigger
+DELIMITER $$
+
+CREATE TRIGGER after_inventory_insert
+AFTER INSERT ON inventory
+FOR EACH ROW
+BEGIN
+    INSERT INTO inventory_audit (inventory_id, action_type, distributor, received_by, barangay_id, inventory_date)
+    VALUES (NEW.inventory_id, 'INSERT', NEW.distributor, NEW.received_by, NEW.barangay_id, NEW.inventory_date);
+END$$
+
+DELIMITER ;
+
+-- insert update
+DELIMITER $$
+
+CREATE TRIGGER after_inventory_update
+AFTER UPDATE ON inventory
+FOR EACH ROW
+BEGIN
+    INSERT INTO inventory_audit (inventory_id, action_type, distributor, received_by, barangay_id, inventory_date)
+    VALUES (NEW.inventory_id, 'UPDATE', NEW.distributor, NEW.received_by, NEW.barangay_id, NEW.inventory_date);
+END$$
+
+DELIMITER ;
+
+-- insert delete
+DELIMITER $$
+
+CREATE TRIGGER after_inventory_delete
+AFTER DELETE ON inventory
+FOR EACH ROW
+BEGIN
+    INSERT INTO inventory_audit (inventory_id, action_type, distributor, received_by, barangay_id, inventory_date)
+    VALUES (OLD.inventory_id, 'DELETE', OLD.distributor, OLD.received_by, OLD.barangay_id, OLD.inventory_date);
+END$$
+
+DELIMITER ;
+
+-- view inventory history
+SELECT 
+  ia.*, 
+  b.name AS barangay_name
+FROM 
+  inventory_audit ia
+LEFT JOIN 
+  barangays b ON ia.barangay_id = b.barangay_id
+WHERE 
+  ia.action_type IN ('INSERT', 'UPDATE', 'DELETE')
+ORDER BY 
+  ia.action_timestamp DESC;
+  
+-- creating a table for item stock
+CREATE TABLE item_stock (
+    stock_id INT PRIMARY KEY AUTO_INCREMENT,
+    barangay_id INT NOT NULL,
+    item_id INT NOT NULL,
+    quantity INT NOT NULL DEFAULT 0,
+    last_updated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (barangay_id) REFERENCES barangays(barangay_id),
+    FOREIGN KEY (item_id) REFERENCES relief_item(item_id),
+    UNIQUE (barangay_id, item_id)
+);
+select * from item_stock;
+
+-- trigger 
+CREATE TABLE item_stock_audit (
+    audit_id INT PRIMARY KEY AUTO_INCREMENT,
+    stock_id INT,
+    barangay_id INT,
+    item_id INT,
+    old_quantity INT,
+    new_quantity INT,
+    action_type ENUM('INSERT', 'UPDATE', 'DELETE'),
+    action_timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+DELIMITER $$
+
+-- Trigger for INSERT
+CREATE TRIGGER after_item_stock_insert
+AFTER INSERT ON item_stock
+FOR EACH ROW
+BEGIN
+    INSERT INTO item_stock_audit (stock_id, barangay_id, item_id, old_quantity, new_quantity, action_type)
+    VALUES (NEW.stock_id, NEW.barangay_id, NEW.item_id, NULL, NEW.quantity, 'INSERT');
+END$$
+
+-- Trigger for UPDATE
+CREATE TRIGGER after_item_stock_update
+AFTER UPDATE ON item_stock
+FOR EACH ROW
+BEGIN
+    INSERT INTO item_stock_audit (stock_id, barangay_id, item_id, old_quantity, new_quantity, action_type)
+    VALUES (NEW.stock_id, NEW.barangay_id, NEW.item_id, OLD.quantity, NEW.quantity, 'UPDATE');
+END$$
+
+-- Trigger for DELETE
+CREATE TRIGGER after_item_stock_delete
+AFTER DELETE ON item_stock
+FOR EACH ROW
+BEGIN
+    INSERT INTO item_stock_audit (stock_id, barangay_id, item_id, old_quantity, new_quantity, action_type)
+    VALUES (OLD.stock_id, OLD.barangay_id, OLD.item_id, OLD.quantity, NULL, 'DELETE');
+END$$
+
+DELIMITER ;
+
+-- view history for stock items
+SELECT 
+    isa.*, 
+    b.name AS barangay_name
+FROM 
+    item_stock_audit isa
+LEFT JOIN 
+    barangays b ON isa.barangay_id = b.barangay_id
+WHERE 
+    isa.action_type IN ('INSERT', 'UPDATE', 'DELETE')
+ORDER BY 
+    isa.action_timestamp DESC;
+
+
+-- NEW TYRONE -- -- NEW TYRONE -- -- NEW TYRONE -- -- NEW TYRONE -- -- NEW TYRONE -- -- NEW TYRONE -- -- NEW TYRONE -- -- NEW TYRONE -- -- NEW TYRONE --
+DROP TABLE IF EXISTS relief_items;
+CREATE TABLE relief_items (
+    item_id INT AUTO_INCREMENT PRIMARY KEY,
+    item_name VARCHAR(100) NOT NULL
+);
+
+select*from relief_items;
+
+INSERT INTO relief_items (item_name) VALUES
+    ('Rice'),
+    ('Canned Sardines'),
+    ('Canned Tuna'),
+    ('Canned Beef'),
+    ('Noodles'),
+    ('Biscuits'),
+    ('Bottle Water'),
+    ('Bar Soap'),
+    ('Toothpaste'),
+    ('Shampoo'),
+    ('Napkin'),
+    ('Powdered Milk');
+
+-- Disaster Table
+DROP TABLE IF EXISTS disaster_types;
+CREATE TABLE disaster_types (
+    disaster_id INT AUTO_INCREMENT PRIMARY KEY,
+    disaster_name VARCHAR(100) NOT NULL
+);
+SELECT * FROM disaster_types;
+Use agapaydb;
+INSERT INTO disaster_types (disaster_name) VALUES
+    ('Fire'),
+    ('Typhoon and Flood'),
+    ('Earthquake'),
+    ('Landslide'),
+    ('Volcanic Eruption'),
+    ('Drought'),
+    ('Epidemic');
+
+DROP TABLE disaster_relief_quantities;
+CREATE TABLE disaster_relief_quantities (
+    disaster_id INT,
+    item_id INT,
+    quantity_per_person INT,
+    PRIMARY KEY (disaster_id, item_id),
+    FOREIGN KEY (disaster_id) REFERENCES disaster_types(disaster_id),
+    FOREIGN KEY (item_id) REFERENCES relief_items(item_id)
+);
+
+-- Fire (disaster_id = 1)
+INSERT INTO disaster_relief_quantities (disaster_id, item_id, quantity_per_person) VALUES
+(1, 1, 1),   -- Rice: 1-4 person 5kg, 5>= is 8kg 
+(1, 2, 3),   -- Canned Sardines: 3 pcs fix per family
+(1, 3, 3),   -- Canned Tuna: 3 pcs fix per family
+(1, 4, 1),   -- Canned Beef: 2 pcs fix per family
+(1, 5, 5),   -- Noodles: 2 packs per family
+(1, 6, 12),  -- Biscuits: 2 pcs fix per family
+(1, 7, 5),   -- Bottled Water: 2 liters per family
+(1, 8, 1),   -- Bar Soap: 1 bar per family 
+(1, 9, 1),   -- Toothpaste: 1 sachet per family
+(1,10, 1),   -- Shampoo: 2 sachet per family 
+(1,11, 1),   -- Napkin: Optional
+(1,12, 1);   -- Powdered Milk: Optional
+
+-- Typhoon & Flood (disaster_id = 2)
+INSERT INTO disaster_relief_quantities (disaster_id, item_id, quantity_per_person) VALUES
+(2, 1, 1),   -- Rice: 1-4 person 5kg, 5>= is 8kg 
+(2, 2, 3),   -- Canned Sardines: 3 pcs fix per family
+(2, 3, 3),   -- Canned Tuna: 3 pcs fix per family
+(2, 4, 1),   -- Canned Beef: 2 pcs fix per family
+(2, 5, 5),   -- Noodles: 2 packs per family
+(2, 6, 12),  -- Biscuits: 2 pcs fix per family
+(2, 7, 5),   -- Bottled Water: 2 liters per family
+(2, 8, 1),   -- Bar Soap: 1 bar per family 
+(2, 9, 1),   -- Toothpaste: 1 sachet per family
+(2,10, 1),   -- Shampoo: 2 sachet per family 
+(2,11, 1),   -- Napkin: Optional
+(2,12, 1);   -- Powdered Milk: Optional
+
+-- Earthquake (disaster_id = 3)
+INSERT INTO disaster_relief_quantities (disaster_id, item_id, quantity_per_person) VALUES
+(3, 1, 1),   -- Rice: 1-4 person 5kg, 5>= is 8kg 
+(3, 2, 3),   -- Canned Sardines: 3 pcs fix per family
+(3, 3, 3),   -- Canned Tuna: 3 pcs fix per family
+(3, 4, 1),   -- Canned Beef: 2 pcs fix per family
+(3, 5, 5),   -- Noodles: 2 packs per family
+(3, 6, 12),  -- Biscuits: 2 pcs fix per family
+(3, 7, 5),   -- Bottled Water: 2 liters per family
+(3, 8, 1),   -- Bar Soap: 1 bar per family 
+(3, 9, 1),   -- Toothpaste: 1 sachet per family
+(3,10, 1),   -- Shampoo: 2 sachet per family 
+(3,11, 1),   -- Napkin: Optional
+(3,12, 1);   -- Powdered Milk: Optional
+
+-- Landslide (disaster_id = 4)
+INSERT INTO disaster_relief_quantities (disaster_id, item_id, quantity_per_person) VALUES
+(4, 1, 1),   -- Rice: 1-4 person 5kg, 5>= is 8kg 
+(4, 2, 3),   -- Canned Sardines: 3 pcs fix per family
+(4, 3, 3),   -- Canned Tuna: 3 pcs fix per family
+(4, 4, 1),   -- Canned Beef: 2 pcs fix per family
+(4, 5, 5),   -- Noodles: 2 packs per family
+(4, 6, 12),  -- Biscuits: 2 pcs fix per family
+(4, 7, 5),   -- Bottled Water: 2 liters per family
+(4, 8, 1),   -- Bar Soap: 1 bar per family 
+(4, 9, 1),   -- Toothpaste: 1 sachet per family
+(4,10, 1),   -- Shampoo: 2 sachet per family 
+(4,11, 1),   -- Napkin: Optional
+(4,12, 1);   -- Powdered Milk: Optional
+
+-- Volcanic Eruption (disaster_id = 5)
+INSERT INTO disaster_relief_quantities (disaster_id, item_id, quantity_per_person) VALUES
+(5, 1, 1),   -- Rice: 1-4 person 5kg, 5>= is 8kg 
+(5, 2, 3),   -- Canned Sardines: 3 pcs fix per family
+(5, 3, 3),   -- Canned Tuna: 3 pcs fix per family
+(5, 4, 1),   -- Canned Beef: 2 pcs fix per family
+(5, 5, 5),   -- Noodles: 2 packs per family
+(5, 6, 12),  -- Biscuits: 2 pcs fix per family
+(5, 7, 5),   -- Bottled Water: 2 liters per family
+(5, 8, 1),   -- Bar Soap: 1 bar per family 
+(5, 9, 1),   -- Toothpaste: 1 sachet per family
+(5,10, 1),   -- Shampoo: 2 sachet per family 
+(5,11, 1),   -- Napkin: Optional
+(5,12, 1);   -- Powdered Milk: Optional
+
+-- Drought (disaster_id = 6)
+INSERT INTO disaster_relief_quantities (disaster_id, item_id, quantity_per_person) VALUES
+(6, 1, 1),   -- Rice: 1-4 person 5kg, 5>= is 8kg 
+(6, 2, 3),   -- Canned Sardines: 3 pcs fix per family
+(6, 3, 3),   -- Canned Tuna: 3 pcs fix per family
+(6, 4, 1),   -- Canned Beef: 2 pcs fix per family
+(6, 5, 5),   -- Noodles: 2 packs per family
+(6, 6, 12),  -- Biscuits: 2 pcs fix per family
+(6, 7, 5),   -- Bottled Water: 2 liters per family
+(6, 8, 1),   -- Bar Soap: 1 bar per family 
+(6, 9, 1),   -- Toothpaste: 1 sachet per family
+(6,10, 1),   -- Shampoo: 2 sachet per family 
+(6,11, 1),   -- Napkin: Optional
+(6,12, 1);   -- Powdered Milk: Optional
+
+-- Epidemic (disaster_id = 7)
+INSERT INTO disaster_relief_quantities (disaster_id, item_id, quantity_per_person) VALUES
+(7, 1, 1),   -- Rice: 1-4 person 5kg, 5>= is 8kg 
+(7, 2, 3),   -- Canned Sardines: 3 pcs fix per family
+(7, 3, 3),   -- Canned Tuna: 3 pcs fix per family
+(7, 4, 1),   -- Canned Beef: 2 pcs fix per family
+(7, 5, 5),   -- Noodles: 2 packs per family
+(7, 6, 12),  -- Biscuits: 2 pcs fix per family
+(7, 7, 5),   -- Bottled Water: 2 liters per family
+(7, 8, 1),   -- Bar Soap: 1 bar per family 
+(7, 9, 1),   -- Toothpaste: 1 sachet per family
+(7,10, 1),   -- Shampoo: 2 sachet per family 
+(7,11, 1),   -- Napkin: Optional
+(7,12, 1);   -- Powdered Milk: Optional
+
+DROP TABLE distributions;
+CREATE TABLE distributions (
+    distribution_id INT AUTO_INCREMENT PRIMARY KEY,
+    citizen_id INT,
+    disaster_id INT,
+    barangay_id INT,
+    distributed_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE distribution_items;
+CREATE TABLE distribution_items (
+    distribution_item_id INT AUTO_INCREMENT PRIMARY KEY,
+    distribution_id INT,
+    item_id INT,
+    quantity INT,
+    FOREIGN KEY (distribution_id) REFERENCES distributions(distribution_id),
+    FOREIGN KEY (item_id) REFERENCES relief_items(item_id)
+);
+
+ALTER TABLE citizens ADD COLUMN distributed BOOLEAN DEFAULT FALSE;
+SELECT * FROM citizens WHERE distributed = true;
+UPDATE citizens SET distributed = 0;
+SET SQL_SAFE_UPDATES = 0;
+UPDATE citizens SET distributed = 0;
+SET SQL_SAFE_UPDATES = 1;
+
+SELECT c.*, b.name AS barangay_name, ci.name AS city_name, r.name AS region_name, co.name AS country_name
+
+FROM citizens c
+JOIN barangays b ON c.barangay_id = b.barangay_id
+JOIN cities ci ON c.city_id = ci.city_id
+JOIN regions r ON c.region_id = r.region_id
+JOIN countries co ON r.country_id = co.country_id
+WHERE c.distributed = TRUE OR c.distributed = 1
+
+
+-- NEW TYRONE -- -- NEW TYRONE -- -- NEW TYRONE -- -- NEW TYRONE -- -- NEW TYRONE -- -- NEW TYRONE -- -- NEW TYRONE --

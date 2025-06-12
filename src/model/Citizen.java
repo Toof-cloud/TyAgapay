@@ -16,8 +16,10 @@ public class Citizen {
     private SimpleStringProperty zip;
     private SimpleStringProperty region_name;
     private SimpleStringProperty country_name;
+    private SimpleStringProperty status;
 
-    public Citizen(String citizen_id, String citizenlastname, String citizenfirstname, String contactNum, String marital_status, String household_no, String valid_id_type, String valid_id_code, String house_no, String barangay_name, String city_name, String zip, String region_name, String country_name) {
+
+    public Citizen(String citizen_id, String citizenlastname, String citizenfirstname, String contactNum, String marital_status, String household_no, String valid_id_type, String valid_id_code, String house_no, String barangay_name, String city_name, String zip, String region_name, String country_name, String status) {
         this.citizen_id = new SimpleStringProperty(citizen_id);
         this.citizenlastname = new SimpleStringProperty(citizenlastname);
         this.citizenfirstname = new SimpleStringProperty(citizenfirstname);
@@ -32,6 +34,7 @@ public class Citizen {
         this.zip = new SimpleStringProperty(zip);
         this.region_name = new SimpleStringProperty(region_name);
         this.country_name = new SimpleStringProperty(country_name);
+        this.status = new SimpleStringProperty(status);
     }
     public String getCitizenID() {
         return citizen_id.get();
@@ -74,5 +77,8 @@ public class Citizen {
     }
     public String getCountryName() {
         return country_name.get();
+    }
+    public String getStatus() {
+        return status.get();
     }
 }

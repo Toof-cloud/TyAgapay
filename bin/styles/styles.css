@@ -1,0 +1,54 @@
+/* Main label styles */
+.label {
+    -fx-padding: 5px;
+    -fx-background-color: #f4f4f4;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-min-width: 150px;
+    -fx-alignment: center;
+    -fx-font-size: 12px;
+}
+
+/* Quantity label specific styles */
+.quantity-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+/* Header label styles */
+.header-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #34495e;
+}
+
+/* Info label styles */
+.info-label {
+    -fx-text-fill: #7f8c8d;
+}
+
+/* Disabled state */
+.label:disabled {
+    -fx-opacity: 0.7;
+}
+
+/* Error state */
+.error-label {
+    -fx-text-fill: #e74c3c;
+}
+
+/* Button styles */
+.button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-padding: 8px 15px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #2980b9;
+}
+
+.button:pressed {
+    -fx-background-color: #2472a4;
+}

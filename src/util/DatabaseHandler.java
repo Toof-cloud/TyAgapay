@@ -21,7 +21,7 @@ public class DatabaseHandler {
     public static Connection getDBConnection() {
     Connection connection = null;
     // Add serverTimezone parameter to the URL
-    String dburl = "jdbc:mysql://localhost:3306/AgapayDBclone?serverTimezone=Asia/Singapore";
+    String dburl = "jdbc:mysql://localhost:3306/Agapaydb?serverTimezone=Asia/Singapore";
     String userName = "root";
     String password = "password";
 
@@ -135,12 +135,12 @@ public class DatabaseHandler {
     ResultSet result = null;
     try {
         String query = "SELECT c.*, b.name AS barangay_name, ci.name AS city_name, r.name AS region_name, co.name AS country_name " +
-                       "FROM citizens c " +
-                       "JOIN barangays b ON c.barangay_id = b.barangay_id " +
-                       "JOIN cities ci ON c.city_id = ci.city_id " +
-                       "JOIN regions r ON c.region_id = r.region_id " +
-                       "JOIN countries co ON c.country_id = co.country_id " +
-                       "WHERE c.barangay_id = ?";
+               "FROM citizens c " +
+               "JOIN barangays b ON c.barangay_id = b.barangay_id " +
+               "JOIN cities ci ON c.city_id = ci.city_id " +
+               "JOIN regions r ON c.region_id = r.region_id " +
+               "JOIN countries co ON c.country_id = co.country_id " +
+               "WHERE c.barangay_id = ? AND (c.distributed = FALSE OR c.distributed = 0)";
         Connection conn = getDBConnection();
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setString(1, getLoggedInBaranggay()); // Only citizens from the logged-in official's barangay
@@ -458,6 +458,7 @@ public class DatabaseHandler {
         } catch (Exception e) { e.printStackTrace(); }
         return id;
     }
+
     public static ResultSet getItemStockForBarangay(String barangayName) {
     ResultSet result = null;
     try {
@@ -474,5 +475,116 @@ public class DatabaseHandler {
         e.printStackTrace();
     }
     return result;
+    }
+
+    public Map<String, Integer> getBarangayItemStocks(String barangayName) {
+        Map<String, Integer> stocks = new HashMap<>();
+        String query = "SELECT ri.item_name, s.quantity " +
+                    "FROM item_stock s " +
+                    "JOIN relief_items ri ON s.item_id = ri.item_id " +
+                    "JOIN barangays b ON s.barangay_id = b.barangay_id " +
+                    "WHERE b.name = ?";
+        try (
+            Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)
+        ) {
+            stmt.setString(1, barangayName);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    stocks.put(rs.getString("item_name"), rs.getInt("quantity"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stocks;
+    }
+
+    public Map<String, Integer> getDisasterBundle(int disasterId) {
+        Map<String, Integer> bundle = new HashMap<>();
+        String sql = "SELECT ri.item_name, drq.quantity_per_person " +
+                    "FROM disaster_relief_quantities drq " +
+                    "JOIN relief_items ri ON drq.item_id = ri.item_id " +
+                    "WHERE drq.disaster_id = ?";
+        try (
+            Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+            stmt.setInt(1, disasterId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    bundle.put(rs.getString("item_name"), rs.getInt("quantity_per_person"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bundle;
+    }
+
+    public int insertDistribution(int citizenId, int disasterId, int barangayId) throws SQLException {
+        String sql = "INSERT INTO distributions (citizen_id, disaster_id, barangay_id) VALUES (?, ?, ?)";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setInt(1, citizenId);
+            stmt.setInt(2, disasterId);
+            stmt.setInt(3, barangayId);
+            stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) return rs.getInt(1);
+        }
+        throw new SQLException("Failed to insert distribution");
+    }
+
+    public void insertDistributionItem(int distributionId, int itemId, int quantity) throws SQLException {
+        String sql = "INSERT INTO distribution_items (distribution_id, item_id, quantity) VALUES (?, ?, ?)";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, distributionId);
+            stmt.setInt(2, itemId);
+            stmt.setInt(3, quantity);
+            stmt.executeUpdate();
+        }
+    }
+
+    public void decrementItemStock(int barangayId, int itemId, int quantity) throws SQLException {
+        String sql = "UPDATE item_stock SET quantity = quantity - ? WHERE barangay_id = ? AND item_id = ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, quantity);
+            stmt.setInt(2, barangayId);
+            stmt.setInt(3, itemId);
+            stmt.executeUpdate();
+        }
+    }
+
+    public void markCitizenAsDistributed(int citizenId) {
+        String sql = "UPDATE citizens SET distributed = TRUE WHERE citizen_id = ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, citizenId);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ResultSet getDistributedCitizens() {
+        ResultSet result = null;
+        try {
+            String query = "SELECT c.*, b.name AS barangay_name, ci.name AS city_name, r.name AS region_name, co.name AS country_name " +
+                "FROM citizens c " +
+                "JOIN barangays b ON c.barangay_id = b.barangay_id " +
+                "JOIN cities ci ON c.city_id = ci.city_id " +
+                "JOIN regions r ON c.region_id = r.region_id " +
+                "JOIN countries co ON r.country_id = co.country_id " +
+                "WHERE c.distributed = TRUE OR c.distributed = 1";
+            Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query);
+            result = stmt.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

@@ -121,7 +121,7 @@ public class HomePageController {
     @FXML
     public void goToDistributeTableHandler(ActionEvent event) throws IOException {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DistributeTablePage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DistributePage1.fxml"));
             Parent root = loader.load();
 
             // Get the current stage from the event source (the button)
@@ -181,21 +181,22 @@ public class HomePageController {
             e.printStackTrace();
         }
     }
+    
     @FXML
     public void goToAdminCrudHandler(ActionEvent event) throws IOException {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminTablePage.fxml"));
-        Parent root = loader.load();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminTablePage.fxml"));
+            Parent root = loader.load();
 
-        // Get the current stage from the event source (the button)
-        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    } catch (Exception e) {
-        e.printStackTrace();
+            // Get the current stage from the event source (the button)
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
     @FXML
     public void checkProfileLogoutHandler(ActionEvent event) throws IOException {
     try {
