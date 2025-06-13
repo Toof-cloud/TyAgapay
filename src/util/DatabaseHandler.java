@@ -578,9 +578,10 @@ public class DatabaseHandler {
                 "JOIN cities ci ON c.city_id = ci.city_id " +
                 "JOIN regions r ON c.region_id = r.region_id " +
                 "JOIN countries co ON r.country_id = co.country_id " +
-                "WHERE c.distributed = TRUE OR c.distributed = 1";
+                "WHERE (c.distributed = TRUE OR c.distributed = 1) AND c.barangay_id = ?";
             Connection conn = getDBConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, getLoggedInBaranggay()); // This should be the barangay_id of the logged-in admin
             result = stmt.executeQuery();
         } catch (Exception e) {
             e.printStackTrace();
