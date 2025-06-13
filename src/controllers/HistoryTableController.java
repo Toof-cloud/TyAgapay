@@ -118,7 +118,7 @@ public class HistoryTableController implements Initializable {
                     rs.getString("zip"),
                     rs.getString("region_name"),
                     rs.getString("country_name"),
-                    "Distributed"
+                    rs.getBoolean("distributed") ? "Distributed" : "Not Distributed"
                 );
                 citizens.add(c);
             }

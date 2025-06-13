@@ -88,7 +88,15 @@ public class DistributeController3 implements Initializable {
     public void setDistributionData(String citizenId, String fullName, String household, String disasterId, String disasterType) {
         System.out.printf("[DEBUG] setDistributionData called with: %s, %s, %s, %s, %s%n",
                 citizenId, fullName, household, disasterId, disasterType);
-        fullNameLabel.setText(fullName);
+
+        // Add comma between last and first name if needed
+        if (fullName != null && fullName.contains(" ")) {
+            String[] parts = fullName.split(" ", 2);
+            fullNameLabel.setText(parts[1] + ", " + parts[0]);
+        } else {
+            fullNameLabel.setText(fullName);
+        }
+
         citizenIDlabel.setText(citizenId);
         householdnumlabel.setText(household);
         disasterIDlabel.setText(disasterId);
@@ -140,8 +148,8 @@ public class DistributeController3 implements Initializable {
 }
 
     // Show summary alert on confirm
-    @FXML
-    private void handleConfirmButton() {
+@FXML
+private void handleConfirmButton() {
     try {
         int citizenId = Integer.parseInt(citizenIDlabel.getText());
         int disasterId = Integer.parseInt(disasterIDlabel.getText());
@@ -203,6 +211,14 @@ public class DistributeController3 implements Initializable {
         alert.setContentText("Distribution ID: " + distributionId + "\n\n" +
             "You can view this transaction in the history table.");
         alert.showAndWait();
+
+        // 4. Go to HomePage after alert is closed
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/HomePage.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) barangaylabel.getScene().getWindow(); // or any node in your current window
+        stage.setScene(new Scene(root));
+        stage.show();
+
     } catch (Exception e) {
         showError("Distribution Error", e.getMessage());
     }
